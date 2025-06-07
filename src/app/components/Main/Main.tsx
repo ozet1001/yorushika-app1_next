@@ -99,7 +99,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
     <div className="py-8 px-4">
       {/* SEO最適化されたHTML構造 */}
       <header className="mb-8">
-        <nav className="text-sm text-gray-600 mb-4" aria-label="パンくずリスト">
+        {/* <nav className="text-sm text-gray-600 mb-4" aria-label="パンくずリスト">
           <ol className="flex space-x-2">
             <li><a href="/" className="hover:text-blue-600">ホーム</a></li>
             <li aria-hidden="true">›</li>
@@ -107,26 +107,69 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             <li aria-hidden="true">›</li>
             <li className="font-medium">{song.name}</li>
           </ol>
-        </nav>
+        </nav> */}
         
         <h1 className="text-4xl font-bold text-gray-800 mb-2">
           {song.name}
         </h1>
-        <p className="text-lg text-gray-600">
+        {/* <p className="text-lg text-gray-600">
           <span>ヨルシカ</span> • 
           <span>{song.album}</span> • 
           <span>{song.year}</span>
-        </p>
+        </p> */}
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* メインコンテンツ */}
         <article className="lg:col-span-2 space-y-6">
+          {/* 基本情報 */}
+          <section className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-xl font-semibold mb-4">基本情報</h2>
+            <dl className="space-y-3">
+              <div>
+                <dt className="text-sm font-medium text-gray-600">アルバム</dt>
+                <dd className="text-gray-800">{song.album}</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-600">リリース</dt>
+                <dd className="text-gray-800">{song.year}</dd>
+              </div>
+            </dl>
+          </section>
+
           {/* 楽曲情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-semibold mb-4">楽曲について</h2>
             <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
               {song.song_info}
+            </div>
+            <h2 className="text-lg  font-semibold mt-4 mb-4">MV</h2>
+              {song.mv_url && (
+                <iframe 
+                  className='block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg' 
+                  width="350" 
+                  height="350" 
+                  src={song.mv_url} 
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerPolicy="strict-origin-when-cross-origin" 
+                  allowFullScreen
+                />
+                )}
+
+              <p className="text-lg font-semibold mt-4 mb-4">歌詞</p>
+              <div className="space-y-3">
+              {song.lyrics && (
+                <a
+                  href={song.lyrics}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-blue-500 text-white text-center px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+                >
+                  歌詞を見る
+                </a>
+              )}
             </div>
           </section>
 
@@ -222,28 +265,6 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
         {/* サイドバー */}
         <aside className="space-y-6">
-          {/* 基本情報 */}
-          <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">基本情報</h2>
-            <dl className="space-y-3">
-              <div>
-                <dt className="text-sm font-medium text-gray-600">楽曲名</dt>
-                <dd className="text-gray-800">{song.name}</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-medium text-gray-600">読み方</dt>
-                <dd className="text-gray-800">{song.kana}</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-medium text-gray-600">アルバム</dt>
-                <dd className="text-gray-800">{song.album}</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-medium text-gray-600">リリース</dt>
-                <dd className="text-gray-800">{song.year}</dd>
-              </div>
-            </dl>
-          </section>
 
           {/* アクションボタン */}
           <section className="bg-white rounded-lg shadow-md p-6">
@@ -259,21 +280,11 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   歌詞を見る
                 </a>
               )}
-              {song.mv_url && (
-                <a
-                  href={song.mv_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-red-500 text-white text-center px-4 py-2 rounded hover:bg-red-600 transition-colors"
-                >
-                  MVを見る
-                </a>
-              )}
             </div>
           </section>
 
           {/* 楽曲統計 */}
-          <section className="bg-white rounded-lg shadow-md p-6">
+          {/* <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">この楽曲について</h2>
             <div className="space-y-2 text-sm text-gray-600">
               <div className="flex justify-between">
@@ -293,7 +304,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 <span>{song.goods?.goods_name ? '✅ あり' : '❌ なし'}</span>
               </div>
             </div>
-          </section>
+          </section> */}
         </aside>
       </div>
     </div>
