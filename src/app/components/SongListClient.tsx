@@ -61,11 +61,6 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
     // console.log(`選択された曲ID: ${songId}`);
   };
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // 検索処理は既にuseMemoで自動実行
-  };
-
   // ✅ 改善4: 検索のクリア機能
   const clearSearch = () => {
     setSearchTerm("");
