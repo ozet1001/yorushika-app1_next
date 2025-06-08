@@ -111,9 +111,9 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
             onClick={() => handleSongClick(song.id)}
           >
             <Link href={`/song/${song.id}`} className="flex flex-col">
-              <span className="font-medium text-gray-800">{song.name}</span>
-              <span className="text-sm text-gray-600">{song.album}</span>
-              <span className="text-xs text-gray-500">{song.year}</span>
+              <span className="font-bold text-gray-900 py-0">{song.name} <span className="text-xs text-gray-500 sm:hidden">( {song.album} )</span></span>
+              <span className="text-sm text-gray-600 hidden sm:inline">{song.album}</span>
+              <span className="text-xs text-gray-500 hidden sm:inline">{song.year}</span>
             </Link>
           </div>
 
