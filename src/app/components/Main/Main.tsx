@@ -96,7 +96,7 @@ const HomeContent = ({ songsCount }: { songsCount: number }) => {
 // 楽曲詳細コンテンツ
 const SongDetailContent = ({ song }: { song: Song }) => {
   return (
-    <div className="py-8 px-4">
+    <div className="py-7 px-1">
       {/* SEO最適化されたHTML構造 */}
       <header className="mb-8">
         {/* <nav className="text-sm text-gray-600 mb-4" aria-label="パンくずリスト">
@@ -221,46 +221,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             </section>
           )}
 
-          {/* 参考リンク */}
-          {(song.reference_list?.reference_url_1 || 
-            song.reference_list?.reference_url_2 || 
-            song.reference_list?.reference_url_3) && (
-            <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4">参考リンク</h2>
-              <div className="space-y-2">
-                {song.reference_list.reference_url_1 && (
-                  <a
-                    href={song.reference_list.reference_url_1}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-blue-600 hover:text-blue-800 text-sm hover:underline"
-                  >
-                    参考リンク 1
-                  </a>
-                )}
-                {song.reference_list.reference_url_2 && (
-                  <a
-                    href={song.reference_list.reference_url_2}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-blue-600 hover:text-blue-800 text-sm hover:underline"
-                  >
-                    参考リンク 2
-                  </a>
-                )}
-                {song.reference_list.reference_url_3 && (
-                  <a
-                    href={song.reference_list.reference_url_3}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-blue-600 hover:text-blue-800 text-sm hover:underline"
-                  >
-                    参考リンク 3
-                  </a>
-                )}
-              </div>
-            </section>
-          )}
+
         </article>
 
         {/* サイドバー */}
@@ -282,6 +243,53 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               )}
             </div>
           </section>
+
+          {/* 参考リンク */}
+          {(song.reference_list?.reference_url_1 || 
+            song.reference_list?.reference_url_2 || 
+            song.reference_list?.reference_url_3) && (
+            <section className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-2xl font-semibold mb-4">参考リンク</h2>
+              <div className="space-y-2">
+                {song.reference_list.reference_url_1 && (
+                  <p>
+                    <a
+                      href={song.reference_list.reference_url_1}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 text-sm hover:underline"
+                    >
+                      参考 1
+                    </a>
+                  </p>
+                )}
+                {song.reference_list.reference_url_2 && (
+                  <p>
+                    <a
+                      href={song.reference_list.reference_url_2}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 text-sm hover:underline"
+                    >
+                      参考 2
+                    </a>
+                  </p>
+                )}
+                {song.reference_list.reference_url_3 && (
+                  <p>
+                    <a
+                      href={song.reference_list.reference_url_3}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 text-sm hover:underline"
+                    >
+                      参考 3
+                    </a>
+                  </p>
+                )}
+              </div>
+            </section>
+          )}
 
           {/* 楽曲統計 */}
           {/* <section className="bg-white rounded-lg shadow-md p-6">

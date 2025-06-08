@@ -34,7 +34,7 @@ const MainLayout = async ({
 
         {/* メインコンテンツエリア */}
         <div className="col-span-1 p-2 mt-5 mb-5 bg-gray-100 rounded-md sm:col-span-4 grid-item">     
-          <main className='pl-5 flex-1 h-full sm:h-screen sm:overflow-y-auto'>
+          <main className='flex-1 h-full sm:h-screen sm:overflow-y-auto'>
             {/* ✅ childrenの代わりにMainコンポーネントを表示 */}
             <Suspense fallback={<Loading />}>
               <Main songsData={allSongs} />            
