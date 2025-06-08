@@ -36,7 +36,6 @@ interface Song {
 export const getSongs = cache(async (): Promise<Song[]> => {
   try {
     console.log('🎵 曲データを取得中...');
-    console.log('🔥 Firebase設定:', process.env.NEXT_PUBLIC_FIREBASE_API_KEY ? '存在' : '不存在');
     const startTime = Date.now();
     
     const songsRef = query(
