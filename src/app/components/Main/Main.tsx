@@ -2,36 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+// firestoreからのSong型をインポート
+import { Song } from "@/types/songs";
 
-interface Song {
-  id: string;
-  name: string;
-  kana: string;
-  album: string;
-  year: string;
-  song_info: string;
-  lyrics: string;
-  mv_url: string;
-  photo: string;
-  holy_locations?: {
-    location_name: string;
-    location_address: string;
-    location_url: string;
-  };
-  goods?: {
-    goods_name: string;
-    goods_info: string;
-    goods_url: string;
-  };
-  reference_list?: {
-    reference_url_1: string;
-    reference_url_2: string;
-    reference_url_3: string;
-  };
-  createdAt?: string | null;
-  editAt?: string | null;
-  isDeleted?: boolean;
-}
 
 interface MainProps {
   songsData: Song[];
@@ -199,27 +172,63 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           )}
 
           {/* グッズ情報 */}
-          {song.goods?.goods_name && (
-            <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4">関連グッズ</h2>
-              <div className="space-y-2">
-                <h3 className="font-medium text-lg">{song.goods.goods_name}</h3>
-                {song.goods.goods_info && (
-                  <p className="text-gray-600">{song.goods.goods_info}</p>
-                )}
-                {song.goods.goods_url && (
-                  <a
-                    href={song.goods.goods_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
-                  >
-                    詳細を見る
-                  </a>
-                )}
+          <section className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-semibold mb-4">関連グッズ</h2>
+              {song.goods?.goods_1?.goods_name && (
+                <div className="space-y-2">
+                  <h3 className="font-medium text-lg">{song.goods?.goods_1?.goods_name}</h3>
+                  {song.goods?.goods_1?.goods_info && (
+                    <p className="text-gray-600">{song.goods?.goods_1?.goods_info}</p>
+                  )}
+                  {song.goods?.goods_1?.goods_url && (
+                    <a
+                      href={song.goods?.goods_1?.goods_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                    >
+                      詳細を見る
+                    </a>
+                  )}
+                </div>
+              )}
+              {song.goods?.goods_2?.goods_name && (
+                <div className="space-y-2">
+                  <h3 className="font-medium text-lg">{song.goods?.goods_2?.goods_name}</h3>
+                  {song.goods?.goods_2?.goods_info && (
+                    <p className="text-gray-600">{song.goods?.goods_2?.goods_info}</p>
+                  )}
+                  {song.goods?.goods_2?.goods_url && (
+                    <a
+                      href={song.goods?.goods_2?.goods_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                    >
+                      詳細を見る
+                    </a>
+                  )}
+                </div>
+              )}
+              {song.goods?.goods_3?.goods_name && (
+                <div className="space-y-2">
+                  <h3 className="font-medium text-lg">{song.goods?.goods_3?.goods_name}</h3>
+                  {song.goods?.goods_3?.goods_info && (
+                    <p className="text-gray-600">{song.goods?.goods_3?.goods_info}</p>
+                  )}
+                  {song.goods?.goods_3?.goods_url && (
+                    <a
+                      href={song.goods?.goods_3?.goods_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                    >
+                      詳細を見る
+                    </a>
+                  )}
               </div>
-            </section>
-          )}
+            )}
+          </section>
 
 
         </article>

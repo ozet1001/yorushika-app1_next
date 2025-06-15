@@ -2,36 +2,8 @@
 
 import React, { useState, useMemo } from "react";
 import Link from 'next/link';
-
-interface Song {
-  id: string;
-  name: string;
-  kana: string;
-  album: string;
-  year: string;
-  song_info: string;
-  lyrics: string;
-  mv_url: string;
-  photo: string;
-  holy_locations?: {
-    location_name: string;
-    location_address: string;
-    location_url: string;
-  };
-  goods?: {
-    goods_name: string;
-    goods_info: string;
-    goods_url: string;
-  };
-  reference_list?: {
-    reference_url_1: string;
-    reference_url_2: string;
-    reference_url_3: string;
-  };
-  createdAt?: string | null;
-  editAt?: string | null;
-  isDeleted?: boolean;
-}
+// firestoreからのSong型をインポート
+import { Song } from "@/types/songs";
 
 interface SongListClientProps {
   initialSongs: Song[];
