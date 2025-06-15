@@ -147,19 +147,19 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section>
 
           {/* 聖地情報 */}
-          {song.holy_locations?.location_name && (
+          {song.holy_locations.holy_locations_1.location_name && (
             <section className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-semibold mb-4">聖地情報</h2>
               <div className="space-y-2">
-                <h3 className="font-medium text-lg">{song.holy_locations.location_name}</h3>
-                {song.holy_locations.location_address && (
+                <h3 className="font-medium text-lg">{song.holy_locations.holy_locations_1.location_name}</h3>
+                {song.holy_locations.holy_locations_1.location_address && (
                   <address className="text-gray-600 not-italic">
-                    {song.holy_locations.location_address}
+                    {song.holy_locations.holy_locations_1.location_address}
                   </address>
                 )}
-                {song.holy_locations.location_url && (
+                {song.holy_locations.holy_locations_1.location_url && (
                   <a
-                    href={song.holy_locations.location_url}
+                    href={song.holy_locations.holy_locations_1.location_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
