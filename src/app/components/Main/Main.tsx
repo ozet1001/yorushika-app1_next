@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 // firestoreからのSong型をインポート
 import { Song } from "@/types/songs";
 import DOMPurify from "isomorphic-dompurify";
-import Image from "next/image";
+// import Image from "next/image";
 interface MainProps {
   songsData: Song[];
 }
