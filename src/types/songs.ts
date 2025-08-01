@@ -8,6 +8,7 @@ interface Song {
   song_info: string;
   lyrics: string;
   mv_url: string;
+  live_url: string;
   photo: string;
   analysis: string;
   

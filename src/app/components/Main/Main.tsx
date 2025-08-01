@@ -1,14 +1,39 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 // firestoreからのSong型をインポート
 import { Song } from "@/types/songs";
-
-
+import DOMPurify from "isomorphic-dompurify";
+import Image from "next/image";
 interface MainProps {
   songsData: Song[];
 }
+
+// アフィリエイトリンクの判定関数
+// URLが楽天またはAmazonのアフィリエイトリンクかどうかを判定
+// MEMO: レンダリング時に毎回読込みされないように、コンポーネントの外に定義
+const isAffiliateLink = (url: string): boolean => {
+  if (!url) return false;
+
+  const rakutenPatterns = [
+    "hb.afl.rakuten.co.jp",
+    "af.moshimo.com",
+    "px.a8.net",
+    "rakuten.co.jp",
+  ];
+
+  const amazonPatterns = [
+    "amazon.co.jp",
+    "amzn.to",
+    "amazon.com",
+    "associates-amazon.com",
+  ];
+
+  const allAffiliatePatterns = [...rakutenPatterns, ...amazonPatterns];
+
+  return allAffiliatePatterns.some((pattern) => url.includes(pattern));
+};
 
 const Main = ({ songsData }: MainProps) => {
   const pathname = usePathname();
@@ -17,12 +42,12 @@ const Main = ({ songsData }: MainProps) => {
   // パスから楽曲IDを取得して該当楽曲を設定
   useEffect(() => {
     const songIdMatch = pathname.match(/^\/song\/(.+)$/);
-    
+
     if (songIdMatch) {
       const songId = songIdMatch[1];
-      const song = songsData.find(s => s.id === songId);
+      const song = songsData.find((s) => s.id === songId);
       setSelectedSong(song || null);
-      
+
       if (song) {
         console.log(`🎵 [Main] 楽曲詳細表示: ${song.name}`);
       } else {
@@ -81,8 +106,8 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             <li className="font-medium">{song.name}</li>
           </ol>
         </nav> */}
-        
-        <h1 className="text-4xl font-bold text-gray-800 mb-2">
+
+        <h1 className="text-4xl font-bold text-gray-800 mb-2 ml-3">
           {song.name}
         </h1>
         {/* <p className="text-lg text-gray-600">
@@ -114,25 +139,51 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-semibold mb-4">楽曲について</h2>
             <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+              {/* <Image
+                src="https://yorushika-image-1.s3.ap-northeast-1.amazonaws.com/b40280e5-6ea7-4a34-bd1c-602e682cf0e1.jpg"
+                alt="Description"
+                width={300}
+                height={300}
+              /> */}
               {song.song_info}
             </div>
-            <h2 className="text-lg  font-semibold mt-4 mb-4">MV</h2>
-              {song.mv_url && (
-                <iframe 
-                  className='block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg' 
-                  width="350" 
-                  height="350" 
-                  src={song.mv_url} 
-                  title="YouTube video player" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  referrerPolicy="strict-origin-when-cross-origin" 
-                  allowFullScreen
-                />
-                )}
+            <h2 className="text-lg  font-semibold mt-4 mb-4">MV・楽曲</h2>
+            {song.mv_url ? (
+              <iframe
+                className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
+                width="350"
+                height="300"
+                src={song.mv_url}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <div className="mt-4 mb-4 pl-4 text-gray-500">MVなし</div>
+            )}
 
-              <p className="text-lg font-semibold mt-4 mb-4">歌詞</p>
-              <div className="space-y-3">
+            {/* <h2 className="text-lg font-semibold mt-4 mb-4">ライブ</h2>
+                {song.live_url ? (
+                  <>
+                    <iframe
+                      className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
+                      width="350"
+                      height="350"
+                      src={song.live_url}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </>
+                ) : (
+                  <div className="mt-4 mb-4 pl-4 text-gray-500">ライブ映像なし</div>
+                )} */}
+
+            <p className="text-lg font-semibold mt-4 mb-4">歌詞</p>
+            <div className="space-y-3">
               {song.lyrics && (
                 <a
                   href={song.lyrics}
@@ -151,7 +202,9 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             <section className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-semibold mb-4">聖地情報</h2>
               <div className="space-y-2">
-                <h3 className="font-medium text-lg">{song.holy_locations.holy_locations_1.location_name}</h3>
+                <h3 className="font-medium text-lg">
+                  {song.holy_locations.holy_locations_1.location_name}
+                </h3>
                 {song.holy_locations.holy_locations_1.location_address && (
                   <address className="text-gray-600 not-italic">
                     {song.holy_locations.holy_locations_1.location_address}
@@ -173,69 +226,102 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* グッズ情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-4">関連グッズ</h2>
-              {song.goods?.goods_1?.goods_name && (
-                <div className="space-y-2">
-                  <h3 className="font-medium text-lg">{song.goods?.goods_1?.goods_name}</h3>
-                  {song.goods?.goods_1?.goods_info && (
-                    <p className="text-gray-600">{song.goods?.goods_1?.goods_info}</p>
-                  )}
-                  {song.goods?.goods_1?.goods_url && (
-                    <a
-                      href={song.goods?.goods_1?.goods_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
-                    >
-                      詳細を見る
-                    </a>
-                  )}
-                </div>
-              )}
-              {song.goods?.goods_2?.goods_name && (
-                <div className="space-y-2">
-                  <h3 className="font-medium text-lg">{song.goods?.goods_2?.goods_name}</h3>
-                  {song.goods?.goods_2?.goods_info && (
-                    <p className="text-gray-600">{song.goods?.goods_2?.goods_info}</p>
-                  )}
-                  {song.goods?.goods_2?.goods_url && (
-                    <a
-                      href={song.goods?.goods_2?.goods_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
-                    >
-                      詳細を見る
-                    </a>
-                  )}
-                </div>
-              )}
-              {song.goods?.goods_3?.goods_name && (
-                <div className="space-y-2">
-                  <h3 className="font-medium text-lg">{song.goods?.goods_3?.goods_name}</h3>
-                  {song.goods?.goods_3?.goods_info && (
-                    <p className="text-gray-600">{song.goods?.goods_3?.goods_info}</p>
-                  )}
-                  {song.goods?.goods_3?.goods_url && (
-                    <a
-                      href={song.goods?.goods_3?.goods_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
-                    >
-                      詳細を見る
-                    </a>
-                  )}
+            <h2 className="text-2xl font-semibold">関連グッズ</h2>
+            {song.goods?.goods_1?.goods_name && (
+              <div className="space-y-2 mt-4">
+                <h3 className="font-medium text-lg">
+                  ・ {song.goods?.goods_1?.goods_name}
+                </h3>
+                {song.goods?.goods_1?.goods_info && (
+                  <p className="text-gray-600">
+                    {song.goods?.goods_1?.goods_info}
+                  </p>
+                )}
+                {isAffiliateLink(song.goods.goods_1.goods_url) ? (
+                  // 楽天・Amazonアフィリエイトの場合：そのまま表示
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(song.goods.goods_1.goods_url),
+                    }}
+                  />
+                ) : (
+                  // それ以外の場合：詳細を見るボタン
+                  <a
+                    href={song.goods.goods_1.goods_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                  >
+                    詳細を見る
+                  </a>
+                )}
+              </div>
+            )}
+            {song.goods?.goods_2?.goods_name && (
+              <div className="space-y-2 mt-4">
+                <h3 className="font-medium text-lg">
+                  ・{song.goods?.goods_2?.goods_name}
+                </h3>
+                {song.goods?.goods_2?.goods_info && (
+                  <p className="text-gray-600">
+                    {song.goods?.goods_2?.goods_info}
+                  </p>
+                )}
+                {isAffiliateLink(song.goods.goods_2.goods_url) ? (
+                  // 楽天・Amazonアフィリエイトの場合：そのまま表示
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(song.goods.goods_2.goods_url),
+                    }}
+                  />
+                ) : (
+                  // それ以外の場合：詳細を見るボタン
+                  <a
+                    href={song.goods.goods_2.goods_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                  >
+                    詳細を見る
+                  </a>
+                )}
+              </div>
+            )}
+            {song.goods?.goods_3?.goods_name && (
+              <div className="space-y-2 mt-4">
+                <h3 className="font-medium text-lg">
+                  ・{song.goods?.goods_3?.goods_name}
+                </h3>
+                {song.goods?.goods_3?.goods_info && (
+                  <p className="text-gray-600">
+                    {song.goods?.goods_3?.goods_info}
+                  </p>
+                )}
+                {isAffiliateLink(song.goods.goods_3.goods_url) ? (
+                  // 楽天・Amazonアフィリエイトの場合：そのまま表示
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(song.goods.goods_3.goods_url),
+                    }}
+                  />
+                ) : (
+                  // それ以外の場合：詳細を見るボタン
+                  <a
+                    href={song.goods.goods_3.goods_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                  >
+                    詳細を見る
+                  </a>
+                )}
               </div>
             )}
           </section>
-
-
         </article>
 
         {/* サイドバー */}
         <aside className="space-y-6">
-
           {/* アクションボタン */}
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">リンク</h2>
@@ -254,8 +340,8 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section>
 
           {/* 参考リンク */}
-          {(song.reference_list?.reference_url_1 || 
-            song.reference_list?.reference_url_2 || 
+          {(song.reference_list?.reference_url_1 ||
+            song.reference_list?.reference_url_2 ||
             song.reference_list?.reference_url_3) && (
             <section className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-semibold mb-4">参考リンク</h2>

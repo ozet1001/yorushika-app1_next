@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "export-firestore": "node scripts/firestore-export.js",
-    "add-song": "node scripts/firebase-add-song.js",
+    "add-song": "node scripts/firestore-song-add.js",
     "add-object-firestore": "node scripts/firestore-add-object.js",
     "add-object_2-firestore": "node scripts/firestore-add-object_2.js",
     "firestore-iso-migrat": "node scripts/firestore-iso-migrate.js"
@@ -17,8 +17,9 @@
   "dependencies": {
     "firebase": "^11.8.1",
     "firebase-admin": "^13.4.0",
+    "isomorphic-dompurify": "^2.25.0",
     "next": "14.2.28",
-    "react": "^18", 
+    "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
