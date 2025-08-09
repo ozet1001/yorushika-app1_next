@@ -26,7 +26,7 @@ Readonly<{
       <Header />
 
       <div className="grid w-[97%] mx-auto grid-cols-1 gap-4 sm:grid-cols-5">
-        <div className="h-full col-span-1 mt-5 mb-5 grid-item">
+        <div className="h-[30vh] sm:h-[95vh] col-span-1 mt-5 mb-5 grid-item">
           <Sidebar songsData={allSongs} />
         </div>
 

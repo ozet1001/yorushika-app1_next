@@ -260,7 +260,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             {song.goods?.goods_2?.goods_name && (
               <div className="space-y-2 mt-4">
                 <h3 className="font-medium text-lg">
-                  ・{song.goods?.goods_2?.goods_name}
+                  ・ {song.goods?.goods_2?.goods_name}
                 </h3>
                 {song.goods?.goods_2?.goods_info && (
                   <p className="text-gray-600">
@@ -290,7 +290,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             {song.goods?.goods_3?.goods_name && (
               <div className="space-y-2 mt-4">
                 <h3 className="font-medium text-lg">
-                  ・{song.goods?.goods_3?.goods_name}
+                  ・ {song.goods?.goods_3?.goods_name}
                 </h3>
                 {song.goods?.goods_3?.goods_info && (
                   <p className="text-gray-600">
@@ -317,6 +317,49 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 )}
               </div>
             )}
+          </section>
+          <section className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-semibold">考察</h2>
+              <div className="max-w-2xl p-2">
+                  <div className="rounded-lg border-spacing-5 border border-gray-200 p-4">
+
+                    <p className="text-gray-700 text-base mb-3 leading-relaxed">
+                        🌙 この楽曲について、あなたの考察を聞かせてください！
+                    </p>
+                    
+                    <ul className="text-gray-600 mb-3 space-y-1 text-sm">
+                        <li className="flex items-start">
+                            <span className="text-purple-500 mr-2">•</span>
+                            歌詞の意味や解釈
+                        </li>
+                        <li className="flex items-start">
+                            <span className="text-purple-500 mr-2">•</span>
+                            n-bunaさんの楽曲構成
+                        </li>
+                        <li className="flex items-start">
+                            <span className="text-purple-500 mr-2">•</span>
+                            suisさんの歌声の表現
+                        </li>
+                        <li className="flex items-start">
+                            <span className="text-purple-500 mr-2">•</span>
+                            MVや小説との関連性
+                        </li>
+                    </ul>
+                    
+                    <p className="text-gray-700 mb-3 leading-normal text-sm">
+                        どんな角度からの解釈でも大歓迎です<br />
+                        ファン同士でヨルシカの世界を深く共有しましょう！
+                    </p>
+                    
+                    <p className="text-purple-600 font-medium mb-3 text-sm">
+                        DMでお待ちしています🎵
+                    </p>
+                    
+                    <p className="text-xs text-gray-500 border-t border-gray-100 pt-3">
+                        ※考察は個人の見解です
+                    </p>
+                </div>
+            </div>
           </section>
         </article>
 

@@ -26,13 +26,13 @@ const Sidebar = async ({ songsData }: SidebarProps) => {
   }
 
   return (
-    <aside className="h-[95%] z-0 p-2 border border-r-2 rounded-sm">
+    <aside className="h-[100%] z-0 p-2 border border-r-2 rounded-sm">
       <span className="mt-2 sm:mt-6 mb-2 font-bold flex items-center">
         <MdLibraryMusic className="inline ml-3 mr-1 text-lg" />
         曲一覧（{all_songs.length}件）
       </span>
 
-      <div className="h-[80%] pr-2">
+      <div className="h-[70%] sm:h-[90%] pr-2">
         <SongListClient initialSongs={all_songs} />
       </div>
     </aside>
