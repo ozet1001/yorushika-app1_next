@@ -182,19 +182,23 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   <div className="mt-4 mb-4 pl-4 text-gray-500">ライブ映像なし</div>
                 )} */}
 
-            <p className="text-lg font-semibold mt-4 mb-4">歌詞</p>
-            <div className="space-y-3">
+
               {song.lyrics && (
-                <a
-                  href={song.lyrics}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-blue-500 text-white text-center px-4 py-2 rounded hover:bg-blue-600 transition-colors"
-                >
-                  歌詞を見る
-                </a>
+                <>
+                  <p className="text-lg font-semibold mt-4 mb-4">歌詞</p>
+                  <div className="space-y-3">
+                    <a
+                      href={song.lyrics}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full bg-blue-500 text-white text-center px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+                    >
+                      歌詞を見る
+                    </a>
+                  </div>
+                </>
               )}
-            </div>
+
           </section>
 
           {/* 聖地情報 */}
