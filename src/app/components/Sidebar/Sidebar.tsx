@@ -32,7 +32,7 @@ const Sidebar = async ({ songsData }: SidebarProps) => {
         曲一覧（全 {all_songs.length}件）
       </span>
 
-      <div className="h-[370px] lg:h-[90%] pr-2">
+      <div className="h-[270px] lg:h-[90%] pr-2">
         <SongListClient initialSongs={all_songs} />
       </div>
     </aside>
