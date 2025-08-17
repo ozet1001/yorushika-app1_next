@@ -207,7 +207,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               <h2 className="text-2xl font-semibold mb-4">聖地情報</h2>
               <div className="space-y-2">
                 <h3 className="font-medium text-lg">
-                  {song.holy_locations.holy_locations_1.location_name}
+                  ・ {song.holy_locations.holy_locations_1.location_name}
                 </h3>
                 {song.holy_locations.holy_locations_1.location_address && (
                   <address className="text-gray-600 not-italic">
@@ -225,8 +225,55 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   </a>
                 )}
               </div>
+            {/* 2つ目の聖地情報 */}
+            {song.holy_locations.holy_locations_2.location_name && (
+              <div className="space-y-2 mt-4">
+                <h3 className="font-medium text-lg">
+                  ・ {song.holy_locations.holy_locations_2.location_name}
+                </h3>
+                {song.holy_locations.holy_locations_2.location_address && (
+                  <address className="text-gray-600 not-italic">
+                    {song.holy_locations.holy_locations_2.location_address}
+                  </address>
+                )}
+                {song.holy_locations.holy_locations_2.location_url && (
+                  <a
+                    href={song.holy_locations.holy_locations_2.location_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
+                  >
+                    地図を見る
+                  </a>
+                )}
+              </div>
+            )}
+            {/* 3つ目の聖地情報 */}
+            {song.holy_locations.holy_locations_3.location_name && (
+              <div className="space-y-2 mt-4">
+                <h3 className="font-medium text-lg">
+                  ・ {song.holy_locations.holy_locations_3.location_name}
+                </h3>
+                {song.holy_locations.holy_locations_3.location_address && (
+                  <address className="text-gray-600 not-italic">
+                    {song.holy_locations.holy_locations_3.location_address}
+                  </address>
+                )}
+                {song.holy_locations.holy_locations_3.location_url && (
+                  <a
+                    href={song.holy_locations.holy_locations_3.location_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
+                  >
+                    地図を見る
+                  </a>
+                )}
+              </div>
+            )}
             </section>
           )}
+
 
           {/* グッズ情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
@@ -238,7 +285,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 </h3>
                 {song.goods?.goods_1?.goods_info && (
                   <p className="text-gray-600">
-                    {song.goods?.goods_1?.goods_info}
+                      {song.goods?.goods_1?.goods_info}
                   </p>
                 )}
                 {isAffiliateLink(song.goods.goods_1.goods_url) ? (
@@ -268,7 +315,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 </h3>
                 {song.goods?.goods_2?.goods_info && (
                   <p className="text-gray-600">
-                    {song.goods?.goods_2?.goods_info}
+                      {song.goods?.goods_2?.goods_info}
                   </p>
                 )}
                 {isAffiliateLink(song.goods.goods_2.goods_url) ? (
@@ -298,7 +345,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 </h3>
                 {song.goods?.goods_3?.goods_info && (
                   <p className="text-gray-600">
-                    {song.goods?.goods_3?.goods_info}
+                      {song.goods?.goods_3?.goods_info}
                   </p>
                 )}
                 {isAffiliateLink(song.goods.goods_3.goods_url) ? (
@@ -369,23 +416,6 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
         {/* サイドバー */}
         <aside className="space-y-6">
-          {/* アクションボタン */}
-          <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">リンク</h2>
-            <div className="space-y-3">
-              {song.lyrics && (
-                <a
-                  href={song.lyrics}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-blue-500 text-white text-center px-4 py-2 rounded hover:bg-blue-600 transition-colors"
-                >
-                  歌詞を見る
-                </a>
-              )}
-            </div>
-          </section>
-
           {/* 参考リンク */}
           {(song.reference_list?.reference_url_1 ||
             song.reference_list?.reference_url_2 ||
