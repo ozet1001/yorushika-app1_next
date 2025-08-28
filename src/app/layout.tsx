@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Yorushika App 1st",
+  title: "月猫図書館",
   description: "ヨルシカの全楽曲の歌詞、MV、制作背景、考察等を一箇所にまとめた総合情報サイト。新規ファンから深い考察を求めるコアファンまで、ヨルシカの世界を深く知ることができるサイト。",
   keywords: [
     "ヨルシカ",

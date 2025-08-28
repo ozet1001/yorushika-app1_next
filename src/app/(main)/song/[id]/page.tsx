@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!song) {
     return {
-      title: '楽曲が見つかりません - Yorushika App 1st',
+      title: '楽曲が見つかりません - 月猫図書館',
       description: '指定された楽曲は存在しないか削除されています。',
       robots: 'noindex, nofollow', // 404は検索エンジンからブロック
     };
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   // ✅ 完璧なSEOメタデータ
   return {
-    title: `${song.name} - ${song.album} | Yorushika App 1st`,
+    title: `${song.name} - ${song.album} | 月猫図書館`,
     description: `${song.name}（${song.album}, ${song.year}）の詳細情報。${song.song_info?.slice(0, 120)}`,
     keywords: [
       'ヨルシカ',
