@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 // firestoreからのSong型をインポート
 import { Song } from "@/types/songs";
 import DOMPurify from "isomorphic-dompurify";
-// import Image from "next/image";
+import Image from "next/image";
 interface MainProps {
   songsData: Song[];
 }
@@ -139,12 +139,6 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-semibold mb-4">楽曲について</h2>
             <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-              {/* <Image
-                src="https://yorushika-image-1.s3.ap-northeast-1.amazonaws.com/b40280e5-6ea7-4a34-bd1c-602e682cf0e1.jpg"
-                alt="Description"
-                width={300}
-                height={300}
-              /> */}
               {song.song_info}
             </div>
             <h2 className="text-lg  font-semibold mt-4 mb-4">MV・楽曲</h2>
@@ -200,79 +194,262 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               )}
 
           </section>
-
-          {/* 聖地情報 */}
-          {song.holy_locations.holy_locations_1.location_name && (
-            <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4">聖地情報</h2>
-              <div className="space-y-2">
-                <h3 className="font-medium text-lg">
-                  ・ {song.holy_locations.holy_locations_1.location_name}
-                </h3>
-                {song.holy_locations.holy_locations_1.location_address && (
-                  <address className="text-gray-600 not-italic">
-                    {song.holy_locations.holy_locations_1.location_address}
-                  </address>
-                )}
-                {song.holy_locations.holy_locations_1.location_url && (
-                  <a
-                    href={song.holy_locations.holy_locations_1.location_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
-                  >
-                    地図を見る
-                  </a>
-                )}
-              </div>
-            {/* 2つ目の聖地情報 */}
-            {song.holy_locations.holy_locations_2.location_name && (
-              <div className="space-y-2 mt-4">
-                <h3 className="font-medium text-lg">
-                  ・ {song.holy_locations.holy_locations_2.location_name}
-                </h3>
-                {song.holy_locations.holy_locations_2.location_address && (
-                  <address className="text-gray-600 not-italic">
-                    {song.holy_locations.holy_locations_2.location_address}
-                  </address>
-                )}
-                {song.holy_locations.holy_locations_2.location_url && (
-                  <a
-                    href={song.holy_locations.holy_locations_2.location_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
-                  >
-                    地図を見る
-                  </a>
-                )}
-              </div>
-            )}
-            {/* 3つ目の聖地情報 */}
-            {song.holy_locations.holy_locations_3.location_name && (
-              <div className="space-y-2 mt-4">
-                <h3 className="font-medium text-lg">
-                  ・ {song.holy_locations.holy_locations_3.location_name}
-                </h3>
-                {song.holy_locations.holy_locations_3.location_address && (
-                  <address className="text-gray-600 not-italic">
-                    {song.holy_locations.holy_locations_3.location_address}
-                  </address>
-                )}
-                {song.holy_locations.holy_locations_3.location_url && (
-                  <a
-                    href={song.holy_locations.holy_locations_3.location_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
-                  >
-                    地図を見る
-                  </a>
-                )}
-              </div>
-            )}
-            </section>
+{/* 聖地情報 */}
+{song?.holy_locations?.holy_locations_1?.location_name && (
+  <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-8 border border-gray-100">
+    <div className="mb-6">
+      <h2 className="text-3xl font-bold text-gray-800 mb-2">聖地情報</h2>
+      <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+    </div>
+    
+    <div className="space-y-8">
+      {/* 1つ目の聖地情報 */}
+      <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-400">
+        <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
+          <span className="relative z-10">{song.holy_locations.holy_locations_1.location_name}</span>
+          <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-200 opacity-60 -z-10"></span>
+        </h3>
+        {song?.holy_locations?.holy_locations_1?.location_address && (
+          <address className="text-gray-600 not-italic mb-4 flex items-center">
+            <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+            </svg>
+            {song.holy_locations.holy_locations_1.location_address}
+          </address>
+        )}
+        <div className="flex-col gap-3 items-star">
+          {song?.holy_locations?.holy_locations_1?.location_url && (
+            <a
+              href={song.holy_locations.holy_locations_1.location_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+            >
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+              </svg>
+              地図を見る
+            </a>
           )}
+        {song?.holy_locations?.holy_locations_1?.location_img_1 && (
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <span className="mr-2">聖地画像 1</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_1}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+          <div className="mt-4 pt-4">
+            <span className="mr-2">聖地画像 2</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_2}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+          <div className="mt-4 pt-4">
+            <span className="mr-2">聖地画像 3</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_3}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        </div>
+      </div>
+
+      {/* 2つ目の聖地情報 */}
+      {song?.holy_locations?.holy_locations_2?.location_name && (
+        <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-purple-400">
+          <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
+            <span className="relative z-10 ">{song.holy_locations.holy_locations_2.location_name}</span>
+            <span className="absolute bottom-0 left-0 w-full h-2 bg-purple-200 opacity-60 -z-10"></span>
+          </h3>
+          {song?.holy_locations?.holy_locations_2?.location_address && (
+            <address className="text-gray-600 not-italic mb-4 flex items-center">
+              <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              {song.holy_locations.holy_locations_2.location_address}
+            </address>
+          )}
+          {song?.holy_locations?.holy_locations_2?.location_url && (
+            <a
+              href={song.holy_locations.holy_locations_2.location_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+            >
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+              </svg>
+              地図を見る
+            </a>
+          )}
+        {song?.holy_locations?.holy_locations_1?.location_img_1 && (
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <span className="mr-2">聖地画像 1</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_1}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+          <div className="mt-4 pt-4">
+            <span className="mr-2">聖地画像 2</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_2}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+          <div className="mt-4 pt-4">
+            <span className="mr-2">聖地画像 3</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_3}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        </div>
+      )}
+
+      {/* 3つ目の聖地情報 */}
+      {song?.holy_locations?.holy_locations_3?.location_name && (
+        <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-pink-400">
+          <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
+            <span className="relative z-10">{song.holy_locations.holy_locations_3.location_name}</span>
+            <span className="absolute bottom-0 left-0 w-full h-2 bg-pink-200 opacity-60 -z-10"></span>
+          </h3>
+          {song?.holy_locations?.holy_locations_3?.location_address && (
+            <address className="text-gray-600 not-italic mb-4 flex items-center">
+              <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              {song.holy_locations.holy_locations_3.location_address}
+            </address>
+          )}
+          {song?.holy_locations?.holy_locations_3?.location_url && (
+            <a
+              href={song.holy_locations.holy_locations_3.location_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+            >
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+              </svg>
+              地図を見る
+            </a>
+          )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_1 && (
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <span className="mr-2">聖地画像 1</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_1}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+          <div className="mt-4 pt-4">
+            <span className="mr-2">聖地画像 2</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_2}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+          <div className="mt-4 pt-4">
+            <span className="mr-2">聖地画像 3</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+            <div className="flex justify-start">
+              <Image
+                src={song.holy_locations.holy_locations_1.location_img_3}
+                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                width={300}
+                height={300}
+                className="mt-4"
+              />
+            </div>
+          </div>
+        )}
+        </div>
+      )}
+    </div>
+    {/* 募集文 */}
+    <div className="mt-5 p-3 bg-blue-50 border-l-4 border-blue-300 rounded-r-lg">
+      <p className="text-sm text-gray-600">
+        📸 <span className="font-medium">ここに載せる聖地画像ほしいです！</span><br /><br />
+        これらの聖地画像をお持ちの方がいらっしゃいましたら、
+        <a 
+          href="https://x.com/GuanDou29555" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800 underline mx-1"
+        >
+          X（Twitter）
+        </a>
+        にてDMかコメントでお声がけいただけますと大変嬉しいです！🙏<br />
+      </p>
+    </div>
+  </section>
+)}
+
 
 
           {/* グッズ情報 */}
