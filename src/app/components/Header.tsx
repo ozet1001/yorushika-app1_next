@@ -17,7 +17,7 @@ function Header() {
                     letterSpacing: '0.1em'
                   }}>
                 <span className="mr-3">🌙</span>
-                個体図書
+                月猫図書館
                 <span className="ml-3">🐈‍⬛</span>
               </h1>
               
