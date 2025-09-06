@@ -122,14 +122,15 @@ const SongDetailContent = ({ song }: { song: Song }) => {
         <article className="lg:col-span-2 space-y-6">
           {/* 基本情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">基本情報</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">基本情報</h2>
+            <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
             <dl className="space-y-3">
               <div>
-                <dt className="text-sm font-medium text-gray-600">アルバム</dt>
+                <dt className="text-base font-medium text-gray-600">アルバム</dt>
                 <dd className="text-gray-800">{song.album}</dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-600">リリース</dt>
+                <dt className="text-base font-medium text-gray-600">リリース</dt>
                 <dd className="text-gray-800">{song.year}</dd>
               </div>
             </dl>
@@ -137,8 +138,9 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* 楽曲情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-4">楽曲について</h2>
-            <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">楽曲について</h2>
+            <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+            <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
               {song.song_info}
             </div>
             <h2 className="text-lg  font-semibold mt-4 mb-4">MV・楽曲</h2>
@@ -198,7 +200,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 {song?.holy_locations?.holy_locations_1?.location_name && (
   <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-8 border border-gray-100">
     <div className="mb-6">
-      <h2 className="text-3xl font-bold text-gray-800 mb-2">聖地情報</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-2">聖地情報</h2>
       <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
     </div>
     
@@ -435,7 +437,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
     <div className="mt-5 p-3 bg-blue-50 border-l-4 border-blue-300 rounded-r-lg">
       <p className="text-sm text-gray-600">
         📸 <span className="font-medium">ここに載せる聖地画像ほしいです！</span><br /><br />
-        これらの聖地画像をお持ちの方がいらっしゃいましたら、
+        上記の聖地画像をお持ちの方がいらっしゃいましたら、
         <a 
           href="https://x.com/GuanDou29555" 
           target="_blank" 
@@ -444,7 +446,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
         >
           X（Twitter）
         </a>
-        にてDMかコメントでお声がけいただけますと大変嬉しいです！🙏<br />
+        にてDMなどいただけますと大変嬉しいです！🙏<br />
       </p>
     </div>
   </section>
@@ -454,10 +456,11 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* グッズ情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold">関連グッズ</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">関連グッズ</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
             {song.goods?.goods_1?.goods_name && (
               <div className="space-y-2 mt-4">
-                <h3 className="font-medium text-lg">
+                <h3 className="font-bold text-base">
                   ・ {song.goods?.goods_1?.goods_name}
                 </h3>
                 {song.goods?.goods_1?.goods_info && (
@@ -478,7 +481,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                     href={song.goods.goods_1.goods_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                    className="inline-block bg-purple-500 text-white px-2 py-2 rounded hover:bg-purple-600 transition-colors"
                   >
                     詳細を見る
                   </a>
@@ -487,7 +490,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             )}
             {song.goods?.goods_2?.goods_name && (
               <div className="space-y-2 mt-4">
-                <h3 className="font-medium text-lg">
+                <h3 className="font-medium text-base">
                   ・ {song.goods?.goods_2?.goods_name}
                 </h3>
                 {song.goods?.goods_2?.goods_info && (
@@ -508,7 +511,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                     href={song.goods.goods_2.goods_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                    className="inline-block bg-purple-500 text-white px-2 py-2 rounded hover:bg-purple-600 transition-colors"
                   >
                     詳細を見る
                   </a>
@@ -517,7 +520,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             )}
             {song.goods?.goods_3?.goods_name && (
               <div className="space-y-2 mt-4">
-                <h3 className="font-medium text-lg">
+                <h3 className="font-medium text-base">
                   ・ {song.goods?.goods_3?.goods_name}
                 </h3>
                 {song.goods?.goods_3?.goods_info && (
@@ -538,7 +541,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                     href={song.goods.goods_3.goods_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors"
+                    className="inline-block bg-purple-500 text-white px-2 py-2 rounded hover:bg-purple-600 transition-colors"
                   >
                     詳細を見る
                   </a>
@@ -547,12 +550,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             )}
           </section>
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold">考察</h2>
+            <h2 className="text-2xl font-semibold mb-2">考察</h2>
+              <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               <div className="max-w-2xl p-2">
                   <div className="rounded-lg border-spacing-5 border border-gray-200 p-4">
 
                     <p className="text-gray-700 text-base mb-3 leading-relaxed">
-                        🌙 この楽曲について、あなたの考察を聞かせてください！
+                        🌙 あなたの考察を聞かせてください！
                     </p>
                     
                     <ul className="text-gray-600 mb-3 space-y-1 text-sm">
@@ -562,7 +566,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                         </li>
                         <li className="flex items-start">
                             <span className="text-purple-500 mr-2">•</span>
-                            n-bunaさんの楽曲構成
+                            n-bunaさんが創る楽曲構成
                         </li>
                         <li className="flex items-start">
                             <span className="text-purple-500 mr-2">•</span>
@@ -576,15 +580,14 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                     
                     <p className="text-gray-700 mb-3 leading-normal text-sm">
                         どんな角度からの解釈でも大歓迎です<br />
-                        ファン同士でヨルシカの世界を深く共有しましょう！
                     </p>
                     
                     <p className="text-purple-600 font-medium mb-3 text-sm">
-                        DMでお待ちしています🎵
+                        DMをお待ちしています🎵
                     </p>
                     
                     <p className="text-xs text-gray-500 border-t border-gray-100 pt-3">
-                        ※考察は個人の見解です
+                        ※ 考察は個人の見解です。
                     </p>
                 </div>
             </div>
@@ -598,7 +601,8 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             song.reference_list?.reference_url_2 ||
             song.reference_list?.reference_url_3) && (
             <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4">参考リンク</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">参考リンク</h2>
+              <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               <div className="space-y-2">
                 {song.reference_list.reference_url_1 && (
                   <p>

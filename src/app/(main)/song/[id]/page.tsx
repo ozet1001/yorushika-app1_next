@@ -8,10 +8,10 @@ interface PageProps {
   };
 }
 
-// ✅ ISR設定（SEO + パフォーマンス）
+// ISR設定（SEO + パフォーマンス）
 export const revalidate = 3600;
 
-// ✅ SEO最重要: 動的メタデータ生成
+// 動的メタデータ生成
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const song = await getSongById(params.id);
 
@@ -23,9 +23,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  // ✅ 完璧なSEOメタデータ
   return {
-    title: `${song.name} - ${song.album} | 月猫図書館`,
+    title: `${song.name} - (${song.album}) | 月猫図書館`,
     description: `${song.name}（${song.album}, ${song.year}）の詳細情報。${song.song_info?.slice(0, 120)}`,
     keywords: [
       'ヨルシカ',
@@ -64,7 +63,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     // Twitter Card
     twitter: {
       card: 'summary_large_image',
-      title: `${song.name} - ${song.album}`,
+      title: `${song.name} - (${song.album})`,
       description: song.song_info?.slice(0, 120) || `${song.name}の楽曲詳細`,
       images: song.photo ? [song.photo] : ['/og-default.jpg'],
     },
@@ -128,18 +127,6 @@ export default async function SongDetailPage({ params }: PageProps) {
         }}
       />
       
-      {/* 
-      ✅ このページは (main) レイアウトを使用するため、
-      layout.tsx が自動的にHeader、Sidebar、Mainコンポーネントを表示
-      
-      Mainコンポーネントが usePathname() で /song/[id] を検知し、
-      自動的に楽曲詳細を表示する
-      
-      このコンポーネントの役割:
-      1. SEO最適化（メタデータ、構造化データ）
-      2. 404処理
-      3. ISR設定
-      */}
       
       {/* ✅ 非表示のSEO用データ（検索エンジン用） */}
       <div style={{ display: 'none' }}>

@@ -11,7 +11,7 @@ function Header() {
             {/* <div className="text-center transition-transform duration-300 group-hover:scale-105"> */}
             <div className="text-center transition-transform duration-300">
               {/* メインタイトル */}
-              <h1 className="text-3xl md:text-4xl font-bold tracking-wide mb-4" 
+              <h1 className="text-2xl md:text-4xl font-bold tracking-wide mb-4" 
                   style={{ 
                     fontFamily: "'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic Medium', sans-serif",
                     letterSpacing: '0.1em'
@@ -22,7 +22,7 @@ function Header() {
               </h1>
               
               {/* 装飾的な線 */}
-              <div className="w-55 h-px bg-white opacity-60 mx-auto mb-4"></div>
+              <div className="w-55 h-px bg-white opacity-60 mx-auto mb-2"></div>
             </div>
           </Link>
           
