@@ -107,7 +107,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </ol>
         </nav> */}
 
-        <h1 className="text-4xl font-bold text-gray-800 mb-2 ml-3">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 ml-3">
           {song.name}
         </h1>
         {/* <p className="text-lg text-gray-600">
@@ -155,7 +155,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 allowFullScreen
               />
             ) : (
-              <div className="mt-4 mb-4 pl-4 text-gray-500">MVなし</div>
+              <div className="mt-4 mb-4 pl-4 text-gray-500">MV・楽曲なし</div>
             )}
 
             {/* <h2 className="text-lg font-semibold mt-4 mb-4">ライブ</h2>
