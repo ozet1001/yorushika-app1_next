@@ -48,7 +48,7 @@ const XShareButton = ({
     return (
       <button
         onClick={handleShare}
-        className={`${styleClasses[style]} ${sizeClasses[size]} transition-colors duration-200 flex items-center gap-2`}
+        className={`${styleClasses[style as keyof typeof styleClasses]} ${sizeClasses[size as keyof typeof sizeClasses]} transition-colors duration-200 flex items-center gap-2`}
       >
         <XIcon size={size === "small" ? 16 : size === "medium" ? 20 : 24} />
         このページをシェア
@@ -59,7 +59,7 @@ const XShareButton = ({
   return (
     <button
       onClick={handleShare}
-      className={`${styleClasses[style]} ${sizeClasses[size]} rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 shadow-sm hover:shadow-md`}
+      className={`${styleClasses[style as keyof typeof styleClasses]} ${sizeClasses[size as keyof typeof sizeClasses]} rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 shadow-sm hover:shadow-md`}
     >
       <XIcon size={size === "small" ? 16 : size === "medium" ? 20 : 24} />
       Xでシェア
