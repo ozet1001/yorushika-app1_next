@@ -32,7 +32,7 @@ Readonly<{
 
         {/* メインコンテンツエリア */}
         <div className="col-span-1 p-2 mt-5 mb-5 bg-gray-100 rounded-md sm:col-span-4 grid-item">
-          <main className="flex-1 h-full">
+          <main className="flex-1">
             {/* ✅ childrenの代わりにMainコンポーネントを表示 */}
             <Suspense fallback={<Loading />}>
               <Main songsData={allSongs} />
@@ -41,7 +41,7 @@ Readonly<{
           </main>
         </div>
       </div>
-
+      
       <Footer />
     </>
   );

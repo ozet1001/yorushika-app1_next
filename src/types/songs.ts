@@ -135,6 +135,40 @@ interface Song {
       location_img_3_account_url: string;
     };
   };
+
+  // 楽曲考察情報
+  song_analysis: {
+    song_analysis_1: {
+      content: string;
+      account_name: string;
+      account_url: string;
+      like_count: number;
+    };
+    song_analysis_2: {
+      content: string;
+      account_name: string;
+      account_url: string;
+      like_count: number;
+    };
+    song_analysis_3: {
+      content: string;
+      account_name: string;
+      account_url: string;
+      like_count: number;
+    };
+    song_analysis_4: {
+      content: string;
+      account_name: string;
+      account_url: string;
+      like_count: number;
+    };
+    song_analysis_5: {
+      content: string;
+      account_name: string;
+      account_url: string;
+      like_count: number;
+    };
+  };
 }
 
 export type { Song };

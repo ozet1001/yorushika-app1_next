@@ -6,6 +6,14 @@ import { usePathname } from "next/navigation";
 import { Song } from "@/types/songs";
 import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
+import XShareButton from "@/app/components/XShareButton";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
 interface MainProps {
   songsData: Song[];
 }
@@ -120,6 +128,17 @@ const SongDetailContent = ({ song }: { song: Song }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* メインコンテンツ */}
         <article className="lg:col-span-2 space-y-6">
+  
+          {/* Xシェアボタン追加 */}
+          <div className="ml-1 mb-1">
+            <XShareButton 
+              text={`ヨルシカ「${song.name}」の楽曲情報✨
+              `}
+              hashtags={["ヨルシカ", song.name, "楽曲情報"]}
+              size="small"
+              style="default"
+            />
+          </div>
           {/* 基本情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">基本情報</h2>
@@ -143,21 +162,21 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
               {song.song_info}
             </div>
-            <h2 className="text-lg  font-semibold mt-4 mb-4">MV・楽曲</h2>
+            <h2 className="text-lg font-semibold mt-4 mb-4">MV・楽曲</h2>
             {song.mv_url ? (
-              <iframe
-                className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
-                width="350"
-                height="300"
-                src={song.mv_url}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
+              <div className="w-full sm:max-w-[600px] ml-1 sm:ml-5 aspect-video">
+                <iframe
+                  className="w-full h-full rounded-lg"
+                  src={song.mv_url}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
             ) : (
-              <div className="mt-4 mb-4 pl-4 text-gray-500">MV・楽曲なし</div>
+              <div className="mt-4 mb-4 pl-4 text-gray-500">MV・楽曲メディアなし</div>
             )}
 
             {/* <h2 className="text-lg font-semibold mt-4 mb-4">ライブ</h2>
@@ -196,263 +215,261 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               )}
 
           </section>
-{/* 聖地情報 */}
-{song?.holy_locations?.holy_locations_1?.location_name && (
-  <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-8 border border-gray-100">
-    <div className="mb-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-2">聖地情報</h2>
-      <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-    </div>
-    
-    <div className="space-y-8">
-      {/* 1つ目の聖地情報 */}
-      <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-400">
-        <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
-          <span className="relative z-10">{song.holy_locations.holy_locations_1.location_name}</span>
-          <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-200 opacity-60 -z-10"></span>
-        </h3>
-        {song?.holy_locations?.holy_locations_1?.location_address && (
-          <address className="text-gray-600 not-italic mb-4 flex items-center">
-            <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-            </svg>
-            {song.holy_locations.holy_locations_1.location_address}
-          </address>
-        )}
-        <div className="flex-col gap-3 items-star">
-          {song?.holy_locations?.holy_locations_1?.location_url && (
-            <a
-              href={song.holy_locations.holy_locations_1.location_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
-            >
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
-              </svg>
-              地図を見る
-            </a>
-          )}
-        {song?.holy_locations?.holy_locations_1?.location_img_1 && (
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <span className="mr-2">聖地画像 1</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_1}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        {song?.holy_locations?.holy_locations_1?.location_img_2 && (
-          <div className="mt-4 pt-4">
-            <span className="mr-2">聖地画像 2</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_2}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        {song?.holy_locations?.holy_locations_1?.location_img_3 && (
-          <div className="mt-4 pt-4">
-            <span className="mr-2">聖地画像 3</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_3}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        </div>
-      </div>
-
-      {/* 2つ目の聖地情報 */}
-      {song?.holy_locations?.holy_locations_2?.location_name && (
-        <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-purple-400">
-          <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
-            <span className="relative z-10 ">{song.holy_locations.holy_locations_2.location_name}</span>
-            <span className="absolute bottom-0 left-0 w-full h-2 bg-purple-200 opacity-60 -z-10"></span>
-          </h3>
-          {song?.holy_locations?.holy_locations_2?.location_address && (
-            <address className="text-gray-600 not-italic mb-4 flex items-center">
-              <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-              </svg>
-              {song.holy_locations.holy_locations_2.location_address}
-            </address>
-          )}
-          {song?.holy_locations?.holy_locations_2?.location_url && (
-            <a
-              href={song.holy_locations.holy_locations_2.location_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
-            >
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
-              </svg>
-              地図を見る
-            </a>
-          )}
-        {song?.holy_locations?.holy_locations_1?.location_img_1 && (
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <span className="mr-2">聖地画像 1</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_1}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        {song?.holy_locations?.holy_locations_1?.location_img_2 && (
-          <div className="mt-4 pt-4">
-            <span className="mr-2">聖地画像 2</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_2}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        {song?.holy_locations?.holy_locations_1?.location_img_3 && (
-          <div className="mt-4 pt-4">
-            <span className="mr-2">聖地画像 3</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_3}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        </div>
-      )}
-
-      {/* 3つ目の聖地情報 */}
-      {song?.holy_locations?.holy_locations_3?.location_name && (
-        <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-pink-400">
-          <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
-            <span className="relative z-10">{song.holy_locations.holy_locations_3.location_name}</span>
-            <span className="absolute bottom-0 left-0 w-full h-2 bg-pink-200 opacity-60 -z-10"></span>
-          </h3>
-          {song?.holy_locations?.holy_locations_3?.location_address && (
-            <address className="text-gray-600 not-italic mb-4 flex items-center">
-              <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-              </svg>
-              {song.holy_locations.holy_locations_3.location_address}
-            </address>
-          )}
-          {song?.holy_locations?.holy_locations_3?.location_url && (
-            <a
-              href={song.holy_locations.holy_locations_3.location_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
-            >
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
-              </svg>
-              地図を見る
-            </a>
-          )}
+          {/* 聖地情報 */}
+          {song?.holy_locations?.holy_locations_1?.location_name && (
+            <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-8 border border-gray-100">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">聖地情報</h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+              </div>
+              
+              <div className="space-y-8">
+                {/* 1つ目の聖地情報 */}
+                <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-400">
+                  <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
+                    <span className="relative z-10">{song.holy_locations.holy_locations_1.location_name}</span>
+                    <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-200 opacity-60 -z-10"></span>
+                  </h3>
+                  {song?.holy_locations?.holy_locations_1?.location_address && (
+                    <address className="text-gray-600 not-italic mb-4 flex items-center">
+                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                      </svg>
+                      {song.holy_locations.holy_locations_1.location_address}
+                    </address>
+                  )}
+                  <div className="flex-col gap-3 items-star">
+                    {song?.holy_locations?.holy_locations_1?.location_url && (
+                      <a
+                        href={song.holy_locations.holy_locations_1.location_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+                        </svg>
+                        地図を見る
+                      </a>
+                    )}
                   {song?.holy_locations?.holy_locations_1?.location_img_1 && (
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <span className="mr-2">聖地画像 1</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_1}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        {song?.holy_locations?.holy_locations_1?.location_img_2 && (
-          <div className="mt-4 pt-4">
-            <span className="mr-2">聖地画像 2</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_2}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        {song?.holy_locations?.holy_locations_1?.location_img_3 && (
-          <div className="mt-4 pt-4">
-            <span className="mr-2">聖地画像 3</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
-            <div className="flex justify-start">
-              <Image
-                src={song.holy_locations.holy_locations_1.location_img_3}
-                alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
-                width={300}
-                height={300}
-                className="mt-4"
-              />
-            </div>
-          </div>
-        )}
-        </div>
-      )}
-    </div>
-    {/* 募集文 */}
-    <div className="mt-5 p-3 bg-blue-50 border-l-4 border-blue-300 rounded-r-lg">
-      <p className="text-sm text-gray-600">
-        📸 <span className="font-medium">ここに載せる聖地画像ほしいです！</span><br /><br />
-        上記の聖地画像をお持ちの方がいらっしゃいましたら、
-        <a 
-          href="https://x.com/GuanDou29555" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800 underline mx-1"
-        >
-          X（Twitter）
-        </a>
-        にてDMなどいただけますと大変嬉しいです！🙏<br />
-      </p>
-    </div>
-  </section>
-)}
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <span className="mr-2">聖地画像 1</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_1}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+                    <div className="mt-4 pt-4">
+                      <span className="mr-2">聖地画像 2</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_2}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+                    <div className="mt-4 pt-4">
+                      <span className="mr-2">聖地画像 3</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_3}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  </div>
+                </div>
 
+                {/* 2つ目の聖地情報 */}
+                {song?.holy_locations?.holy_locations_2?.location_name && (
+                  <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-purple-400">
+                    <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
+                      <span className="relative z-10 ">{song.holy_locations.holy_locations_2.location_name}</span>
+                      <span className="absolute bottom-0 left-0 w-full h-2 bg-purple-200 opacity-60 -z-10"></span>
+                    </h3>
+                    {song?.holy_locations?.holy_locations_2?.location_address && (
+                      <address className="text-gray-600 not-italic mb-4 flex items-center">
+                        <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                        {song.holy_locations.holy_locations_2.location_address}
+                      </address>
+                    )}
+                    {song?.holy_locations?.holy_locations_2?.location_url && (
+                      <a
+                        href={song.holy_locations.holy_locations_2.location_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+                        </svg>
+                        地図を見る
+                      </a>
+                    )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_1 && (
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <span className="mr-2">聖地画像 1</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_1}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+                    <div className="mt-4 pt-4">
+                      <span className="mr-2">聖地画像 2</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_2}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+                    <div className="mt-4 pt-4">
+                      <span className="mr-2">聖地画像 3</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_3}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  </div>
+                )}
 
+                {/* 3つ目の聖地情報 */}
+                {song?.holy_locations?.holy_locations_3?.location_name && (
+                  <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-pink-400">
+                    <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
+                      <span className="relative z-10">{song.holy_locations.holy_locations_3.location_name}</span>
+                      <span className="absolute bottom-0 left-0 w-full h-2 bg-pink-200 opacity-60 -z-10"></span>
+                    </h3>
+                    {song?.holy_locations?.holy_locations_3?.location_address && (
+                      <address className="text-gray-600 not-italic mb-4 flex items-center">
+                        <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                        {song.holy_locations.holy_locations_3.location_address}
+                      </address>
+                    )}
+                    {song?.holy_locations?.holy_locations_3?.location_url && (
+                      <a
+                        href={song.holy_locations.holy_locations_3.location_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+                        </svg>
+                        地図を見る
+                      </a>
+                    )}
+                            {song?.holy_locations?.holy_locations_1?.location_img_1 && (
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <span className="mr-2">聖地画像 1</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_1}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+                    <div className="mt-4 pt-4">
+                      <span className="mr-2">聖地画像 2</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_2}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+                    <div className="mt-4 pt-4">
+                      <span className="mr-2">聖地画像 3</span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+                      <div className="flex justify-start">
+                        <Image
+                          src={song.holy_locations.holy_locations_1.location_img_3}
+                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          width={300}
+                          height={300}
+                          className="mt-4"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  </div>
+                )}
+              </div>
+              {/* 募集文 */}
+              <div className="mt-5 p-3 bg-blue-50 border-l-4 border-blue-300 rounded-r-lg">
+                <p className="text-sm text-gray-600">
+                  📸 <span className="font-medium">ここに載せる聖地画像ほしいです！</span><br /><br />
+                  聖地画像を載せてもいいよ！って方は、
+                  <a 
+                    href="https://x.com/GuanDou29555" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline mx-1"
+                  >
+                    X
+                  </a>
+                  へDM等いただけますと大変嬉しいです！🙏<br />
+                </p>
+              </div>
+            </section>
+          )}
 
           {/* グッズ情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
@@ -550,46 +567,245 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             )}
           </section>
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-2">考察</h2>
+            <h2 className="text-2xl font-semibold mb-2">楽曲考察</h2>
               <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-              <div className="max-w-2xl p-2">
-                  <div className="rounded-lg border-spacing-5 border border-gray-200 p-4">
 
-                    <p className="text-gray-700 text-base mb-3 leading-relaxed">
-                        🌙 あなたの考察を聞かせてください！
-                    </p>
-                    
-                    <ul className="text-gray-600 mb-3 space-y-1 text-sm">
-                        <li className="flex items-start">
-                            <span className="text-purple-500 mr-2">•</span>
-                            歌詞の意味や解釈
-                        </li>
-                        <li className="flex items-start">
-                            <span className="text-purple-500 mr-2">•</span>
-                            n-bunaさんが創る楽曲構成
-                        </li>
-                        <li className="flex items-start">
-                            <span className="text-purple-500 mr-2">•</span>
-                            suisさんの歌声の表現
-                        </li>
-                        <li className="flex items-start">
-                            <span className="text-purple-500 mr-2">•</span>
-                            MVや小説との関連性
-                        </li>
-                    </ul>
-                    
-                    <p className="text-gray-700 mb-3 leading-normal text-sm">
-                        どんな角度からの解釈でも大歓迎です<br />
-                    </p>
-                    
-                    <p className="text-purple-600 font-medium mb-3 text-sm">
-                        DMをお待ちしています🎵
-                    </p>
-                    
-                    <p className="text-xs text-gray-500 border-t border-gray-100 pt-3">
-                        ※ 考察は個人の見解です。
-                    </p>
+              {/* 考察情報 */}
+              {(song?.song_analysis?.song_analysis_1?.content ||
+                song?.song_analysis?.song_analysis_2?.content ||
+                song?.song_analysis?.song_analysis_3?.content ||
+                song?.song_analysis?.song_analysis_4?.content ||
+                song?.song_analysis?.song_analysis_5?.content) && (
+
+                  <div className="space-y-6">
+                    {/* song_analysis_1 */}
+                    {song?.song_analysis?.song_analysis_1?.content && (
+                      <div className="bg-white rounded-lg border border-gray-200 mb-6  p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="mb-4">
+                          <p className="text-gray-800 leading-relaxed text-sm whitespace-pre-wrap">
+                            {song.song_analysis.song_analysis_1.content}
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div className="flex items-center space-x-2">
+                            {song.song_analysis.song_analysis_1.account_url ? (
+                              <a 
+                                href={song.song_analysis.song_analysis_1.account_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-purple-600 hover:text-purple-800 font-medium text-sm transition-colors"
+                              >
+                                {song.song_analysis.song_analysis_1.account_name || '匿名'}
+                              </a>
+                            ) : (
+                              <span className="text-gray-600 font-medium text-sm">
+                                {song.song_analysis.song_analysis_1.account_name || '匿名'}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* <div className="flex items-center space-x-1">
+                            <span className="text-red-500">♥</span>
+                            <span className="text-sm text-gray-600">
+                              {song.song_analysis.song_analysis_1.like_count || 0}
+                            </span>
+                          </div> */}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* song_analysis_2 */}
+                    {song?.song_analysis?.song_analysis_2?.content && (
+                      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="mb-4">
+                          <p className="text-gray-800 leading-relaxed text-base whitespace-pre-wrap">
+                            {song.song_analysis.song_analysis_2.content}
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div className="flex items-center space-x-2">
+                            {song.song_analysis.song_analysis_2.account_url ? (
+                              <a 
+                                href={song.song_analysis.song_analysis_2.account_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-purple-600 hover:text-purple-800 font-medium text-sm transition-colors"
+                              >
+                                {song.song_analysis.song_analysis_2.account_name || '匿名'}
+                              </a>
+                            ) : (
+                              <span className="text-gray-600 font-medium text-sm">
+                                {song.song_analysis.song_analysis_2.account_name || '匿名'}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* <div className="flex items-center space-x-1">
+                            <span className="text-red-500">♥</span>
+                            <span className="text-sm text-gray-600">
+                              {song.song_analysis.song_analysis_2.like_count || 0}
+                            </span>
+                          </div> */}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* song_analysis_3 */}
+                    {song?.song_analysis?.song_analysis_3?.content && (
+                      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="mb-4">
+                          <p className="text-gray-800 leading-relaxed text-base whitespace-pre-wrap">
+                            {song.song_analysis.song_analysis_3.content}
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div className="flex items-center space-x-2">
+                            {song.song_analysis.song_analysis_3.account_url ? (
+                              <a 
+                                href={song.song_analysis.song_analysis_3.account_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-purple-600 hover:text-purple-800 font-medium text-sm transition-colors"
+                              >
+                                {song.song_analysis.song_analysis_3.account_name || '匿名'}
+                              </a>
+                            ) : (
+                              <span className="text-gray-600 font-medium text-sm">
+                                {song.song_analysis.song_analysis_3.account_name || '匿名'}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* <div className="flex items-center space-x-1">
+                            <span className="text-red-500">♥</span>
+                            <span className="text-sm text-gray-600">
+                              {song.song_analysis.song_analysis_3.like_count || 0}
+                            </span>
+                          </div> */}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* song_analysis_4 */}
+                    {song?.song_analysis?.song_analysis_4?.content && (
+                      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="mb-4">
+                          <p className="text-gray-800 leading-relaxed text-base whitespace-pre-wrap">
+                            {song.song_analysis.song_analysis_4.content}
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div className="flex items-center space-x-2">
+                            {song.song_analysis.song_analysis_4.account_url ? (
+                              <a 
+                                href={song.song_analysis.song_analysis_4.account_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-purple-600 hover:text-purple-800 font-medium text-sm transition-colors"
+                              >
+                                {song.song_analysis.song_analysis_4.account_name || '匿名'}
+                              </a>
+                            ) : (
+                              <span className="text-gray-600 font-medium text-sm">
+                                {song.song_analysis.song_analysis_4.account_name || '匿名'}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* <div className="flex items-center space-x-1">
+                            <span className="text-red-500">♥</span>
+                            <span className="text-sm text-gray-600">
+                              {song.song_analysis.song_analysis_4.like_count || 0}
+                            </span>
+                          </div> */}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* song_analysis_5 */}
+                    {song?.song_analysis?.song_analysis_5?.content && (
+                      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="mb-4">
+                          <p className="text-gray-800 leading-relaxed text-base whitespace-pre-wrap">
+                            {song.song_analysis.song_analysis_5.content}
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div className="flex items-center space-x-2">
+                            {song.song_analysis.song_analysis_5.account_url ? (
+                              <a 
+                                href={song.song_analysis.song_analysis_5.account_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-purple-600 hover:text-purple-800 font-medium text-sm transition-colors"
+                              >
+                                {song.song_analysis.song_analysis_5.account_name || '匿名'}
+                              </a>
+                            ) : (
+                              <span className="text-gray-600 font-medium text-sm">
+                                {song.song_analysis.song_analysis_5.account_name || '匿名'}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* <div className="flex items-center space-x-1">
+                            <span className="text-red-500">♥</span>
+                            <span className="text-sm text-gray-600">
+                              {song.song_analysis.song_analysis_5.like_count || 0}
+                            </span>
+                          </div> */}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+              )}
+
+            {/* 考察募集文 */}
+            <div className="max-w-2xl mt-8 p-2">
+              <div className="rounded-lg border border-gray-200 p-4 bg-gradient-to-br from-purple-50 to-indigo-50">
+                
+                <p className="text-gray-800 text-base mb-4 leading-relaxed font-medium">
+                  🌙 あなたの考察を聞かせてください！
+                </p>
+                
+                <ul className="text-gray-600 mb-4 space-y-2 text-sm">
+                  <li className="flex items-start">
+                    <span className="text-purple-500 mr-2 mt-0.5">•</span>
+                    歌詞の意味や解釈
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-500 mr-2 mt-0.5">•</span>
+                    n-bunaさんが創る楽曲構成
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-500 mr-2 mt-0.5">•</span>
+                    suisさんの歌声の表現
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-500 mr-2 mt-0.5">•</span>
+                    MVや小説との関連性
+                  </li>
+                </ul>
+                
+                <p className="text-gray-700 mb-4 leading-normal text-sm">
+                  どんな角度からの解釈でも大歓迎です✨
+                </p>
+                
+                <p className="text-purple-600 font-medium mb-4 text-sm">
+                  XでDMをいただけると嬉しいです🎵
+                </p>
+                
+                <div className="border-t border-gray-200 pt-3 mt-4 bg-white/50 -mx-4 px-4 rounded-b-lg">
+                  <p className="text-xs text-gray-500 text-center">
+                    ※ ここに載せる考察は個人の見解であり、公式の見解ではありません
+                  </p>
                 </div>
+              </div>
             </div>
           </section>
         </article>
@@ -626,7 +842,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                     >
                       参考 2
                     </a>
-                  </p>
+                  </p>  
                 )}
                 {song.reference_list.reference_url_3 && (
                   <p>
@@ -668,6 +884,43 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section> */}
         </aside>
       </div>
+      <Accordion type="single" collapsible className="w-[100%] sm:w-[66%] mt-6 bg-blue-200 rounded-md">
+        <AccordionItem value="greeting">
+          <AccordionTrigger className="pl-5 pr-5 no-underline hover:no-underlin">管理人メッセージ</AccordionTrigger>
+          <AccordionContent className="bg-white rounded-b-mde">
+            <div className="space-y-4 text-sm pt-5 w-[95%] mx-auto pb-3">
+              <p>はじめまして！管理人のたにぐちです。</p>
+                <p className="text-sm leading-loose">
+                  このサイトは、ヨルシカの楽曲情報をまとめたファンサイトです。 
+                  <br />
+                  SNS等を見ていると情報が散らばっていて見つけるのが大変なので、曲ごとに整理したら欲しい情報に素早くアクセスできるのでは？と思い作成しました。
+                  <br /> 
+                  楽曲の考察や関連する写真なども載せれるようにして、皆さんからのご協力をいただきながら、 より充実したファンサイトに育てていきたいと思っています。<br/>
+                  まだ成長途中で定期的にアップデートしていきますので、ぜひブックマークして時々覗いてみてくださいね。
+                </p>
+                                        
+                <p className="text-sm">
+                  ご要望や修正点などがございましたら、Xの
+                  <a 
+                    href="https://x.com/GuanDou29555" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline mx-1"
+                  >
+                    @GuanDou29555
+                  </a>
+                  までお気軽にご連絡ください。
+                </p>
+                    
+                  <div className="border-t border-gray-200 pt-3 text-left">
+                    <p className="text-xs text-gray-500">
+                      ※ このサイトは非公式のファンサイトです。
+                    </p>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
     </div>
   );
 };
