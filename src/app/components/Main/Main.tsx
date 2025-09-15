@@ -128,12 +128,11 @@ const SongDetailContent = ({ song }: { song: Song }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* メインコンテンツ */}
         <article className="lg:col-span-2 space-y-6">
-  
+          
           {/* Xシェアボタン追加 */}
           <div className="ml-1 mb-1">
             <XShareButton 
-              text={`ヨルシカ「${song.name}」の楽曲情報✨
-              `}
+              text={`ヨルシカ「${song.name}」の楽曲情報✨`}
               hashtags={["ヨルシカ", song.name, "楽曲情報"]}
               size="small"
               style="default"
@@ -164,17 +163,17 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             </div>
             <h2 className="text-lg font-semibold mt-4 mb-4">MV・楽曲</h2>
             {song.mv_url ? (
-              <div className="w-full sm:max-w-[600px] ml-1 sm:ml-5 aspect-video">
-                <iframe
-                  className="w-full h-full rounded-lg"
-                  src={song.mv_url}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
+              <iframe
+                className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
+                width="350"
+                height="300"
+                src={song.mv_url}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             ) : (
               <div className="mt-4 mb-4 pl-4 text-gray-500">MV・楽曲メディアなし</div>
             )}
@@ -889,7 +888,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           <AccordionTrigger className="pl-5 pr-5 no-underline hover:no-underlin">管理人メッセージ</AccordionTrigger>
           <AccordionContent className="bg-white rounded-b-mde">
             <div className="space-y-4 text-sm pt-5 w-[95%] mx-auto pb-3">
-              <p>はじめまして！管理人のたにぐちです。</p>
+              <p>こんにちは、管理人のたにぐちです。</p>
                 <p className="text-sm leading-loose">
                   このサイトは、ヨルシカの楽曲情報をまとめたファンサイトです。 
                   <br />

@@ -18,7 +18,7 @@ const XShareButton = ({
     const hashtagsString = hashtags.join(',');
     
     const params = new URLSearchParams({
-      url: currentUrl + "\n",
+      url: currentUrl + "\n\n",
       text: shareText,
       hashtags: hashtagsString
     });
