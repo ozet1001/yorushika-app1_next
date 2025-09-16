@@ -779,7 +779,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="text-purple-500 mr-2 mt-0.5">•</span>
-                    n-bunaさんが創る楽曲構成
+                    n-bunaさんが創る楽曲構成・各楽器パートのフレーズについて
                   </li>
                   <li className="flex items-start">
                     <span className="text-purple-500 mr-2 mt-0.5">•</span>
