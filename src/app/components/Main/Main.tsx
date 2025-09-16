@@ -158,7 +158,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">楽曲について</h2>
             <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-            <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
+            <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
               {song.song_info}
             </div>
             <h2 className="text-lg font-semibold mt-4 mb-4">MV・楽曲</h2>
@@ -892,7 +892,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 <p className="text-sm leading-loose">
                   このサイトは、ヨルシカの楽曲情報をまとめたファンサイトです。 
                   <br />
-                  SNS等を見ていると情報が散らばっていて見つけるのが大変なので、曲ごとに整理したら欲しい情報に素早くアクセスできるのでは？と思い作成しました。
+                  ネットだと情報が点在していて見つけるのが大変なので、曲ごとに整理したら欲しい情報に素早くアクセスできるのでは？と思い作成しました。
                   <br /> 
                   楽曲の考察や関連する写真なども載せれるようにして、皆さんからのご協力をいただきながら、 より充実したファンサイトに育てていきたいと思っています。<br/>
                   まだ成長途中で定期的にアップデートしていきますので、ぜひブックマークして時々覗いてみてくださいね。
