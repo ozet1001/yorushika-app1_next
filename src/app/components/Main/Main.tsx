@@ -264,8 +264,22 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                           className="mt-4"
                         />
                       </div>
-                    </div>
-                  )}
+                      </div>
+                    )}
+                    {song?.holy_locations?.holy_locations_1?.location_img_1_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_1.location_img_1_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_1.location_img_1_account_name.replace('@', '')}
+                        </a>
+                         さん
+                      </div>
+                    )}
                   {song?.holy_locations?.holy_locations_1?.location_img_2 && (
                     <div className="mt-4 pt-4">
                       <span className="mr-2">聖地画像 2</span>
@@ -281,6 +295,20 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     </div>
                   )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_2_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_1.location_img_2_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_1.location_img_2_account_name.replace('@', '')}
+                        </a>
+                         さん
+                      </div>
+                    )}
                   {song?.holy_locations?.holy_locations_1?.location_img_3 && (
                     <div className="mt-4 pt-4">
                       <span className="mr-2">聖地画像 3</span>
@@ -296,6 +324,20 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     </div>
                   )}
+                  {song?.holy_locations?.holy_locations_1?.location_img_3_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_1.location_img_3_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_1.location_img_3_account_name.replace('@', '')}
+                        </a>
+                        さん
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -327,14 +369,14 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                         地図を見る
                       </a>
                     )}
-                  {song?.holy_locations?.holy_locations_1?.location_img_1 && (
+                  {song?.holy_locations?.holy_locations_2?.location_img_1 && (
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <span className="mr-2">聖地画像 1</span>
                       <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
                       <div className="flex justify-start">
                         <Image
-                          src={song.holy_locations.holy_locations_1.location_img_1}
-                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          src={song.holy_locations.holy_locations_2.location_img_1}
+                          alt={`${song.holy_locations.holy_locations_2.location_name}の写真`}
                           width={300}
                           height={300}
                           className="mt-4"
@@ -342,14 +384,28 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     </div>
                   )}
-                  {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+                  {song?.holy_locations?.holy_locations_2?.location_img_1_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_2.location_img_1_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_2.location_img_1_account_name.replace('@', '')}
+                        </a>
+                        さん
+                      </div>
+                    )}
+                  {song?.holy_locations?.holy_locations_2?.location_img_2 && (
                     <div className="mt-4 pt-4">
                       <span className="mr-2">聖地画像 2</span>
                       <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
                       <div className="flex justify-start">
                         <Image
-                          src={song.holy_locations.holy_locations_1.location_img_2}
-                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          src={song.holy_locations.holy_locations_2.location_img_2}
+                          alt={`${song.holy_locations.holy_locations_2.location_name}の写真`}
                           width={300}
                           height={300}
                           className="mt-4"
@@ -357,14 +413,28 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     </div>
                   )}
-                  {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+                  {song?.holy_locations?.holy_locations_2?.location_img_2_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_2.location_img_2_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_2.location_img_2_account_name.replace('@', '')}
+                        </a>
+                        さん
+                      </div>
+                    )}
+                  {song?.holy_locations?.holy_locations_2?.location_img_3 && (
                     <div className="mt-4 pt-4">
                       <span className="mr-2">聖地画像 3</span>
                       <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
                       <div className="flex justify-start">
                         <Image
-                          src={song.holy_locations.holy_locations_1.location_img_3}
-                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          src={song.holy_locations.holy_locations_2.location_img_3}
+                          alt={`${song.holy_locations.holy_locations_2.location_name}の写真`}
                           width={300}
                           height={300}
                           className="mt-4"
@@ -372,6 +442,20 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     </div>
                   )}
+                  {song?.holy_locations?.holy_locations_2?.location_img_3_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_2.location_img_3_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_2.location_img_3_account_name.replace('@', '')}
+                        </a>
+                        さん
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -403,14 +487,14 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                         地図を見る
                       </a>
                     )}
-                            {song?.holy_locations?.holy_locations_1?.location_img_1 && (
+                    {song?.holy_locations?.holy_locations_3?.location_img_1 && (
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <span className="mr-2">聖地画像 1</span>
                       <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
                       <div className="flex justify-start">
                         <Image
-                          src={song.holy_locations.holy_locations_1.location_img_1}
-                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          src={song.holy_locations.holy_locations_3.location_img_1}
+                          alt={`${song.holy_locations.holy_locations_3.location_name}の写真`}
                           width={300}
                           height={300}
                           className="mt-4"
@@ -418,14 +502,28 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     </div>
                   )}
-                  {song?.holy_locations?.holy_locations_1?.location_img_2 && (
+                  {song?.holy_locations?.holy_locations_3.location_img_1_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_3.location_img_1_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_3.location_img_1_account_name.replace('@', '')}
+                        </a>
+                        さん
+                      </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_3?.location_img_2 && (
                     <div className="mt-4 pt-4">
                       <span className="mr-2">聖地画像 2</span>
                       <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
                       <div className="flex justify-start">
                         <Image
-                          src={song.holy_locations.holy_locations_1.location_img_2}
-                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          src={song.holy_locations.holy_locations_3.location_img_2}
+                          alt={`${song.holy_locations.holy_locations_3.location_name}の写真`}
                           width={300}
                           height={300}
                           className="mt-4"
@@ -433,20 +531,48 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     </div>
                   )}
-                  {song?.holy_locations?.holy_locations_1?.location_img_3 && (
+                  {song?.holy_locations?.holy_locations_3.location_img_2_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_3.location_img_2_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_3.location_img_2_account_name.replace('@', '')}
+                        </a>
+                        さん
+                      </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_3?.location_img_3 && (
                     <div className="mt-4 pt-4">
                       <span className="mr-2">聖地画像 3</span>
                       <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
                       <div className="flex justify-start">
                         <Image
-                          src={song.holy_locations.holy_locations_1.location_img_3}
-                          alt={`${song.holy_locations.holy_locations_1.location_name}の写真`}
+                          src={song.holy_locations.holy_locations_3.location_img_3}
+                          alt={`${song.holy_locations.holy_locations_3.location_name}の写真`}
                           width={300}
                           height={300}
                           className="mt-4"
                         />
                       </div>
                     </div>
+                  )}
+                  {song?.holy_locations?.holy_locations_3.location_img_3_account_name && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <span className="mr-1">📸 by</span>
+                        <a
+                          href={`${song.holy_locations.holy_locations_3.location_img_3_account_url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                        >
+                          @{song.holy_locations.holy_locations_3.location_img_3_account_name.replace('@', '')}
+                        </a>
+                        さん
+                      </div>
                   )}
                   </div>
                 )}
