@@ -216,7 +216,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section>
           {/* 聖地情報 */}
           {song?.holy_locations?.holy_locations_1?.location_name && (
-            <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-8 border border-gray-100">
+            <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-4 sm:p-8 border border-gray-100">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">聖地情報</h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
@@ -224,7 +224,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               
               <div className="space-y-8">
                 {/* 1つ目の聖地情報 */}
-                <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-400">
+                <div className="bg-white rounded-lg p-3 sm:p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-400">
                   <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
                     <span className="relative z-10">{song.holy_locations.holy_locations_1.location_name}</span>
                     <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-200 opacity-60 -z-10"></span>
@@ -270,13 +270,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     )}
                     {song?.holy_locations?.holy_locations_1?.location_img_1_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_1.location_img_1_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_1.location_img_1_account_name.replace('@', '')}
                         </a>
@@ -302,13 +302,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     )}
                   {song?.holy_locations?.holy_locations_1?.location_img_2_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_1.location_img_2_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_1.location_img_2_account_name.replace('@', '')}
                         </a>
@@ -334,13 +334,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     )}
                   {song?.holy_locations?.holy_locations_1?.location_img_3_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_1.location_img_3_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_1.location_img_3_account_name.replace('@', '')}
                         </a>
@@ -352,7 +352,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
                 {/* 2つ目の聖地情報 */}
                 {song?.holy_locations?.holy_locations_2?.location_name && (
-                  <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-purple-400">
+                  <div className="bg-white rounded-lg p-3 sm:p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-purple-400">
                     <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
                       <span className="relative z-10 ">{song.holy_locations.holy_locations_2.location_name}</span>
                       <span className="absolute bottom-0 left-0 w-full h-2 bg-purple-200 opacity-60 -z-10"></span>
@@ -397,13 +397,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     )}
                   {song?.holy_locations?.holy_locations_2?.location_img_1_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_2.location_img_1_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_2.location_img_1_account_name.replace('@', '')}
                         </a>
@@ -429,13 +429,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     )}
                   {song?.holy_locations?.holy_locations_2?.location_img_2_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_2.location_img_2_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_2.location_img_2_account_name.replace('@', '')}
                         </a>
@@ -461,13 +461,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     )}
                   {song?.holy_locations?.holy_locations_2?.location_img_3_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_2.location_img_3_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_2.location_img_3_account_name.replace('@', '')}
                         </a>
@@ -479,7 +479,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
                 {/* 3つ目の聖地情報 */}
                 {song?.holy_locations?.holy_locations_3?.location_name && (
-                  <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-pink-400">
+                  <div className="bg-white rounded-lg p-3 sm:p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-pink-400">
                     <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
                       <span className="relative z-10">{song.holy_locations.holy_locations_3.location_name}</span>
                       <span className="absolute bottom-0 left-0 w-full h-2 bg-pink-200 opacity-60 -z-10"></span>
@@ -524,13 +524,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                       </div>
                     )}
                   {song?.holy_locations?.holy_locations_3.location_img_1_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_3.location_img_1_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_3.location_img_1_account_name.replace('@', '')}
                         </a>
@@ -556,13 +556,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                     </div>
                   )}
                   {song?.holy_locations?.holy_locations_3.location_img_2_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_3.location_img_2_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_3.location_img_2_account_name.replace('@', '')}
                         </a>
@@ -588,13 +588,13 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                     </div>
                   )}
                   {song?.holy_locations?.holy_locations_3.location_img_3_account_name && (
-                      <div className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-xs sm:text-sm text-gray-600">
                         <span className="mr-1">📸 by</span>
                         <a
                           href={`${song.holy_locations.holy_locations_3.location_img_3_account_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
+                          className="text-xs sm:text-sm text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200"
                         >
                           @{song.holy_locations.holy_locations_3.location_img_3_account_name.replace('@', '')}
                         </a>
