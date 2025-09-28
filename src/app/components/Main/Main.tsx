@@ -623,6 +623,93 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             </section>
           )}
 
+          {/* オマージュ作品 */}
+          {/* {song?.literatures?.literatures_1?.work_name && (
+            <section className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-2xl font-semibold mb-2">オマージュ作品</h2>
+              <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                <div className="space-y-3">
+                {Object.entries(song.literatures)
+                  .filter(([, literature]) => literature.work_name)
+                  .map(([key, literature]) => (
+                    <div key={key} className="border-l-4 border-blue-200 pl-4 py-2">
+                      <h3 className="font-medium text-lg text-gray-800">
+                        <a 
+                          href={literature.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="hover:text-blue-600 transition-colors duration-200"
+                        >
+                          {literature.work_name}
+                        </a>
+                      </h3>
+                      <p className="text-gray-600 text-sm mt-1">
+                        著者: {literature.author}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+            </section>
+          )} */}
+
+          {/* タイアップ情報 */}
+            <section className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-2xl font-semibold mb-2">タイアップ情報</h2>
+              <div className="mb-5 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+              <div className="space-y-4">
+                {Object.entries(song.tieup_info)
+                  .filter(([, tieup_info]) => tieup_info.tieup_name)
+                  .map(([key, tieup_info]) => {
+                    // YouTubeのビデオIDをURLから抽出する関数
+                    const getYoutubeVideoId = (url: string) => {
+                      if (!url) return null;
+                      // 標準的なYouTube URL、短縮URL、埋め込みURLなどに対応する正規表現
+                      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                      const match = url.match(regExp);
+                      return (match && match[2].length === 11) ? match[2] : null;
+                    };
+
+                    const videoId = getYoutubeVideoId(tieup_info.tieup_url);
+
+                    return (
+                      <div key={key} className="border-l-4 border-blue-200 pl-4 py-2">
+                        <h3 className="font-medium text-lg text-gray-800">
+                          {tieup_info.tieup_name}
+                        </h3>
+
+                        {/* videoIdがあればYouTube埋め込み、なければ通常のリンクを表示 */}
+                        {videoId ? (
+                          <div className="mt-2 w-full">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${videoId}`}
+                              className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
+                              width="350"
+                              height="300"
+                              title="YouTube video player"
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allowFullScreen
+                            ></iframe>
+                          </div>
+                        ) : (
+                          <p className="text-gray-600 text-sm mt-1">
+                            <a 
+                              href={tieup_info.tieup_url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="hover:text-blue-600 transition-colors duration-200 break-all"
+                            >
+                            {tieup_info.tieup_url}
+                            </a>
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
+            </section>
+
           {/* グッズ情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">関連グッズ</h2>
