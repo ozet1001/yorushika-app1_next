@@ -680,17 +680,17 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                         {/* videoIdがあればYouTube埋め込み、なければ通常のリンクを表示 */}
                         {videoId ? (
                           <div className="mt-2 w-full">
-                            <iframe
-                              src={`https://www.youtube.com/embed/${videoId}`}
-                              className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
-                              width="350"
-                              height="300"
-                              title="YouTube video player"
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              referrerPolicy="strict-origin-when-cross-origin"
-                              allowFullScreen
-                            ></iframe>
+                            <div className="relative w-full aspect-video max-w-[500px]">
+                              <iframe
+                                src={`https://www.youtube.com/embed/${videoId}`}
+                                className="absolute top-0 left-0 w-full h-full rounded-lg"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                              ></iframe>
+                            </div>
                           </div>
                         ) : (
                           <p className="text-gray-600 text-sm mt-1">
