@@ -1,7 +1,16 @@
 import type { Metadata, Viewport  } from "next";
 import Script from 'next/script'
 import localFont from "next/font/local";
+import { Kaisei_Decol } from 'next/font/google'
 import "./globals.css";
+
+
+const kaisei = Kaisei_Decol({ 
+  weight: ['500', '700'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  variable: '--font-kaisei',
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -64,7 +73,7 @@ export default function RootLayout({
           </Script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${kaisei.variable} antialiased`}
       >
         {children}
       </body>

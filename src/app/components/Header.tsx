@@ -12,8 +12,8 @@ function Header() {
             <div className="text-center transition-transform duration-300">
               {/* メインタイトル */}
               <h1 className="text-2xl md:text-4xl font-bold tracking-wide mb-4" 
-                  style={{ 
-                    fontFamily: "'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic Medium', sans-serif",
+                  style={{
+                    fontFamily: 'var(--font-kaisei), serif',
                     letterSpacing: '0.1em'
                   }}>
                 <span className="mr-3">🌙</span>
