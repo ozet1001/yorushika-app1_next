@@ -1,7 +1,8 @@
 "use client";
-
 import React, { useState, useMemo } from "react";
 import Link from 'next/link';
+import { MdLibraryMusic } from "react-icons/md";
+import { FaMusic } from "react-icons/fa"; // タイアップアイコン用
 // firestoreからのSong型をインポート
 import { Song } from "@/types/songs";
 
@@ -14,18 +15,32 @@ interface SongListClientProps {
 const SongListClient = ({ initialSongs }: SongListClientProps) => {
   const [selectedSongId, setSelectedSongId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showOnlyTieup, setShowOnlyTieup] = useState(false); // タイアップフィルタのstate
 
-  // 検索フィルタリング
+  // 検索フィルタリング + タイアップフィルタリング
   const filteredSongs = useMemo(() => {
-    if (!searchTerm.trim()) return initialSongs;
-    
-    const term = searchTerm.toLowerCase();
-    return initialSongs.filter(song =>
-      song.name?.toLowerCase().includes(term) ||
-      song.kana?.toLowerCase().includes(term) ||
-      song.album?.toLowerCase().includes(term)
-    );
-  }, [initialSongs, searchTerm]);
+    let songs = initialSongs;
+
+    // タイアップフィルタ
+    if (showOnlyTieup) {
+      songs = songs.filter(song => 
+        song.tieup_info?.tieup_info_1?.tieup_name && 
+        song.tieup_info.tieup_info_1.tieup_name.trim() !== ''
+      );
+    }
+
+    // 検索フィルタ
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      songs = songs.filter(song =>
+        song.name?.toLowerCase().includes(term) ||
+        song.kana?.toLowerCase().includes(term) ||
+        song.album?.toLowerCase().includes(term)
+      );
+    }
+
+    return songs;
+  }, [initialSongs, searchTerm, showOnlyTieup]);
 
   const handleSongClick = (songId: string) => {
     setSelectedSongId(songId);
@@ -45,12 +60,23 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
     }
   };
 
+  // タイアップフィルタのトグル
+  const toggleTieupFilter = () => {
+    setShowOnlyTieup(!showOnlyTieup);
+  };
+
   return (
     <div className="h-full flex flex-col">
       {/* 検索フォーム */}
-       {/* ✅ 改善6: 検索フォームのUIと機能向上 */}
+      {/* ✅ 改善6: 検索フォームのUIと機能向上 */}
       <div className="p-2 pb-4 border-b border-gray-200">
-        <div className="relative">
+        <span className="mt-2 sm:mt-6 mb-4 font-bold flex items-center">
+          <MdLibraryMusic className="inline ml-1 mr-1 text-lg" />
+          曲一覧（全 {filteredSongs.length}件）
+        </span>
+
+        {/* 検索バー */}
+        <div className="relative mb-3">
           <input
             type="search"
             value={searchTerm}
@@ -66,9 +92,26 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          
         </div>
-     </div>
+
+        {/* タイアップフィルタボタン */}
+        <button
+          onClick={toggleTieupFilter}
+          className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+            showOnlyTieup
+              ? 'bg-blue-600 text-white hover:bg-blue-700'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          <FaMusic className="text-sm" />
+          <span>タイアップありのみ</span>
+          {showOnlyTieup && (
+            <span className="ml-1 text-xs bg-blue-500 px-2 py-0.5 rounded-full">
+              ON
+            </span>
+          )}
+        </button>
+      </div>
 
       {/* 曲一覧 */}
       <div className="flex-1 overflow-y-auto">
@@ -83,18 +126,24 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
             onClick={() => handleSongClick(song.id)}
           >
             <Link href={`/song/${song.id}`} className="flex flex-col">
-              <span className="font-bold text-gray-900 py-0">{song.name} <span className="text-xs text-gray-500 lg:hidden">( {song.album} )</span></span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-900 py-0">{song.name}</span>
+                {/* タイアップアイコン表示 */}
+                {song.tieup_info?.tieup_info_1?.tieup_name && (
+                  <FaMusic className="text-xs text-blue-600" title="タイアップあり" />
+                )}
+                <span className="text-xs text-gray-500 lg:hidden">( {song.album} )</span>
+              </div>
               <span className="text-sm text-gray-600 hidden lg:inline">{song.album}</span>
               <span className="text-xs text-gray-500 hidden lg:inline">{song.year}</span>
             </Link>
           </div>
-
         ))}
         
         {filteredSongs.length === 0 && (
           <div className="flex items-center justify-center p-8">
             <p className="text-gray-500">
-              {searchTerm ? '検索結果が見つかりません' : '曲がありません'}
+              {searchTerm || showOnlyTieup ? '条件に一致する曲が見つかりません' : '曲がありません'}
             </p>
           </div>
         )}

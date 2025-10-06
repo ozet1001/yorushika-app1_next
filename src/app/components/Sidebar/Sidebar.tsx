@@ -1,5 +1,4 @@
 import React from "react";
-import { MdLibraryMusic } from "react-icons/md";
 import SongListClient from "@/app/components/SongListClient";
 // firestoreからのSong型をインポート
 import { Song } from "@/types/songs";
@@ -27,11 +26,6 @@ const Sidebar = async ({ songsData }: SidebarProps) => {
 
   return (
     <aside className="h-[100%] z-0 p-2 border border-r-2 rounded-sm">
-      <span className="mt-2 sm:mt-6 mb-2 font-bold flex items-center">
-        <MdLibraryMusic className="inline ml-3 mr-1 text-lg" />
-        曲一覧（全 {all_songs.length}件）
-      </span>
-
       <div className="h-[270px] lg:h-[90%] pr-2">
         <SongListClient initialSongs={all_songs} />
       </div>
