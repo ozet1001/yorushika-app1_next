@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
         {/* メインコンテンツ */}
         <main className="container max-w-4xl px-4 py-12 mx-auto">
             <div className="bg-white rounded-lg shadow-md p-8">
-            <h1 className="text-3xl font-bold mb-8 pb-4 border-b-2" style={{ color: '#499FD8' }}>
+            <h1 className="text-2xl sm:text-3xl font-bold mb-8 pb-4 border-b-2" style={{ color: '#499FD8' }}>
                 プライバシーポリシー
             </h1>
 
