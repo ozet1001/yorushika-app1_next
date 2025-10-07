@@ -1,6 +1,12 @@
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'プライバシーポリシー | 月猫図書館',
+  description: '「月猫図書館」のプライバシーポリシーです。',
+}
 
 export default function PrivacyPolicyPage() {
   return (
