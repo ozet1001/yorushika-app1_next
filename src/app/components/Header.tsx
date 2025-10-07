@@ -4,7 +4,7 @@ import Link from 'next/link';
 function Header() {
   return (
     <>
-      <header className="w-full py-10 text-white shadow-lg" style={{ backgroundColor: '#499FD8' }}>
+      <header className="w-full py-8 text-white shadow-lg" style={{ backgroundColor: '#499FD8' }}>
         <div className="container flex flex-col items-center justify-center px-4 mx-auto">
           <Link href="/" className="group">
             {/* 文字ベースのロゴデザイン */}

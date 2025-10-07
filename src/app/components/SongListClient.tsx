@@ -97,13 +97,13 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
         {/* タイアップフィルタボタン */}
         <button
           onClick={toggleTieupFilter}
-          className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+          className={`flex items-center gap-2 px-2 py-1 text-sm rounded-lg transition-all ${
             showOnlyTieup
               ? 'bg-blue-600 text-white hover:bg-blue-700'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          <FaMusic className="text-sm" />
+          <FaMusic className="text-xs" />
           <span>タイアップありのみ</span>
           {showOnlyTieup && (
             <span className="ml-1 text-xs bg-blue-500 px-2 py-0.5 rounded-full">
