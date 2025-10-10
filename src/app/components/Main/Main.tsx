@@ -33,7 +33,7 @@ const isAffiliateLink = (url: string): boolean => {
 
   const amazonPatterns = [
     "amazon.co.jp",
-    "amzn.to",
+    // "amzn.to",
     "amazon.com",
     "associates-amazon.com",
   ];
