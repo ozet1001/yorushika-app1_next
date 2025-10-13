@@ -28,6 +28,14 @@ interface Song {
     reference_url_3: string;
   };
   
+  // 楽曲情報
+  play_info: {
+    bpm: string;
+    key: string;
+    time_signature: string;
+    capo: string;
+  };
+
   // タイアップ情報
   tieup_info: {
     tieup_info_1: {

@@ -102,7 +102,7 @@ const HomeContent = ({ songsCount }: { songsCount: number }) => {
 // 楽曲詳細コンテンツ
 const SongDetailContent = ({ song }: { song: Song }) => {
   return (
-    <div className="py-7 px-1">
+    <div className="py-5 px-1">
       {/* SEO最適化されたHTML構造 */}
       <header className="mb-8">
         {/* <nav className="text-sm text-gray-600 mb-4" aria-label="パンくずリスト">
@@ -153,6 +153,22 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               </div>
             </dl>
           </section>
+
+          {/* 演奏情報 */}
+            <section className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">演奏情報</h2>
+              <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+              {song.play_info.bpm && (
+                <>
+                  <h2 className="text-sm sm:text-md font-semibold mt-2 mb-2">BPM：{song.play_info.bpm}</h2>
+                  <h2 className="text-sm sm:text-md font-semibold mb-2">Key：{song.play_info.key}</h2>
+                  <h2 className="text-sm sm:text-md font-semibold mb-2">簡易コード：{song.play_info.capo}</h2>
+                  {/* <h2 className="text-md font-semibold mb-2">拍子：{song.play_info.time_signature}</h2> */}
+                  <p className="mt-2 text-sm text-gray-700">※ 演奏の参考情報です</p>
+                </>
+              )}
+              </section>
+
 
           {/* 楽曲情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
