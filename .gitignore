@@ -22,7 +22,7 @@
 
 # debug
 npm-debug.log*
-yarn-debug.log*
+yarn-debug.log* 
 yarn-error.log*
 
 # local env files
@@ -36,3 +36,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 serviceAccountKey.json
+
+# firebase
+firestore-export-*.json
