@@ -640,33 +640,32 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           )}
 
           {/* オマージュ作品 */}
-          {/* {song?.literatures?.literatures_1?.work_name && (
             <section className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-semibold mb-2">オマージュ作品</h2>
               <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                <div className="space-y-3">
-                {Object.entries(song.literatures)
-                  .filter(([, literature]) => literature.work_name)
-                  .map(([key, literature]) => (
-                    <div key={key} className="border-l-4 border-blue-200 pl-4 py-2">
-                      <h3 className="font-medium text-lg text-gray-800">
-                        <a 
-                          href={literature.url} 
-                          target="_blank" 
+                <div className="space-y-4">
+                  {Object.entries(song.literatures)
+                    .filter(([, literature]) => literature.work_name)
+                    .map(([key, literature]) => (
+                      <div key={key} className="border-l-4 border-blue-200 pl-4 py-2">
+                        <h3 className="font-medium text-lg text-gray-800">
+                            {literature.work_name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mt-1 mb-3">
+                          著者: {literature.author}
+                        </p>
+                        <a
+                          href={literature.url}
+                          target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-blue-600 transition-colors duration-200"
+                          className="inline-block bg-purple-500 text-white px-2 py-2 rounded hover:bg-purple-600 transition-colors"
                         >
-                          {literature.work_name}
+                        作品を見る
                         </a>
-                      </h3>
-                      <p className="text-gray-600 text-sm mt-1">
-                        著者: {literature.author}
-                      </p>
-                    </div>
-                  ))}
+                      </div>
+                    ))}
                 </div>
             </section>
-          )} */}
 
           {/* タイアップ情報 */}
             <section className="bg-white rounded-lg shadow-md p-6">
