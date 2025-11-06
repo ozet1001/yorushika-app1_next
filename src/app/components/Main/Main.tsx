@@ -115,7 +115,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </ol>
         </nav> */}
 
-        <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 mb-2 ml-3">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 ml-3">
           {song.name}
         </h1>
         {/* <p className="text-lg text-gray-600">
