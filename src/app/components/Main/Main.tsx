@@ -115,7 +115,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </ol>
         </nav> */}
 
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 ml-3">
+        <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 mb-2 ml-3">
           {song.name}
         </h1>
         {/* <p className="text-lg text-gray-600">
@@ -140,7 +140,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </div>
           {/* 基本情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">基本情報</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">基本情報</h2>
             <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
             <dl className="space-y-3">
               <div>
@@ -156,7 +156,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* 演奏情報 */}
             <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">演奏情報</h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-2">演奏情報</h2>
               <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               {song.play_info.bpm && (
                 <>
@@ -172,7 +172,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* 楽曲情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">楽曲について</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">楽曲について</h2>
             <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
             <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
               {song.song_info}
@@ -194,7 +194,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               <div className="mt-4 mb-4 pl-4 text-gray-500">MV・楽曲メディアなし</div>
             )}
 
-            {/* <h2 className="text-lg font-semibold mt-4 mb-4">ライブ</h2>
+            <h2 className="text-lg font-semibold mt-4 mb-4">ライブ映像</h2>
                 {song.live_url ? (
                   <>
                     <iframe
@@ -210,7 +210,54 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   </>
                 ) : (
                   <div className="mt-4 mb-4 pl-4 text-gray-500">ライブ映像なし</div>
-                )} */}
+                )}
+
+
+                {song.live_url_2 ? (
+                  <>
+                    <div className="relative my-5">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-300"></div>
+                      </div>
+                      <div className="relative flex justify-center">
+                        <span className="bg-white px-4 text-gray-500 text-sm">🎥 他のライブ映像 🎥</span>
+                      </div>
+                    </div>
+                    <iframe
+                      className="block w-full sm:max-w-[500px] ml-1 mb-5 sm:ml-5 rounded-lg"
+                      width="350"
+                      height="350"
+                      src={song.live_url_2}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </>
+                ) : null}
+
+                {song.live_url_3 ? (
+                  <>
+                    <div className="relative my-5">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-300"></div>
+                      </div>
+                      <div className="relative flex justify-center">
+                        <span className="bg-white px-4 text-gray-500 text-sm">🎥 他のライブ映像 🎥</span>
+                      </div>
+                    </div>
+                    <iframe
+                      className="block w-full sm:max-w-[500px] ml-1 mb-5 sm:ml-5 rounded-lg"
+                      width="350"
+                      height="350"
+                      src={song.live_url_3}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </>
+                ) : null}
 
 
               {song.lyrics && (
@@ -234,14 +281,14 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           {song?.holy_locations?.holy_locations_1?.location_name && (
             <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-4 sm:p-8 border border-gray-100">
               <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">聖地情報</h2>
+                <h2 className="text-xl font-bold text-gray-800 mb-2">聖地情報</h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               </div>
               
               <div className="space-y-8">
                 {/* 1つ目の聖地情報 */}
                 <div className="bg-white rounded-lg p-3 sm:p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-400">
-                  <h3 className="font-bold text-xl text-gray-800 mb-3 relative inline-block">
+                  <h3 className="font-bold text-lg text-gray-800 mb-3 relative inline-block">
                     <span className="relative z-10">{song.holy_locations.holy_locations_1.location_name}</span>
                     <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-200 opacity-60 -z-10"></span>
                   </h3>
@@ -641,7 +688,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* オマージュ作品 */}
             <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-2">オマージュ作品</h2>
+              <h2 className="text-xl font-semibold mb-2">オマージュ作品</h2>
               <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                 <div className="space-y-4">
                   {Object.entries(song.literatures)
@@ -669,7 +716,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* タイアップ情報 */}
             <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-2">タイアップ情報</h2>
+              <h2 className="text-xl font-semibold mb-2">タイアップ情報</h2>
               <div className="mb-5 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               <div className="space-y-4">
                 {Object.entries(song.tieup_info)
@@ -727,7 +774,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
 
           {/* グッズ情報 */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">関連グッズ</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">関連グッズ</h2>
             <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
             {song.goods?.goods_1?.goods_name && (
               <div className="space-y-2 mt-4">
@@ -821,7 +868,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             )}
           </section>
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-2">楽曲考察</h2>
+            <h2 className="text-xl font-semibold mb-2">楽曲考察</h2>
               <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
 
               {/* 考察情報 */}
@@ -1071,7 +1118,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             song.reference_list?.reference_url_2 ||
             song.reference_list?.reference_url_3) && (
             <section className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">参考リンク</h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-2">参考リンク</h2>
               <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               <div className="space-y-2">
                 {song.reference_list.reference_url_1 && (

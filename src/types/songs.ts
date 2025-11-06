@@ -9,6 +9,8 @@ interface Song {
   lyrics: string;
   mv_url: string;
   live_url: string;
+  live_url_2: string;
+  live_url_3: string;
   photo: string;
   analysis: string;
   

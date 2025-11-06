@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import Link from 'next/link';
 import { MdLibraryMusic } from "react-icons/md";
 import { FaMusic } from "react-icons/fa"; // タイアップアイコン用
+import { RiLiveFill } from "react-icons/ri"; // ライブ映像アイコン用
 // firestoreからのSong型をインポート
 import { Song } from "@/types/songs";
 
@@ -16,8 +17,9 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
   const [selectedSongId, setSelectedSongId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [showOnlyTieup, setShowOnlyTieup] = useState(false); // タイアップフィルタのstate
+  const [showOnlyLive, setShowOnlyLive] = useState(false); // ライブ映像ィルタのstate
 
-  // 検索フィルタリング + タイアップフィルタリング
+  // 検索フィルタリング + タイアップフィルタリング+ ライブ映像フィルタリング
   const filteredSongs = useMemo(() => {
     let songs = initialSongs;
 
@@ -26,6 +28,14 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
       songs = songs.filter(song => 
         song.tieup_info?.tieup_info_1?.tieup_name && 
         song.tieup_info.tieup_info_1.tieup_name.trim() !== ''
+      );
+    }
+
+    // ライブ映像フィルタ
+    if (showOnlyLive) {
+      songs = songs.filter(song => 
+        song.live_url && 
+        song.live_url.trim() !== ''
       );
     }
 
@@ -40,7 +50,7 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
     }
 
     return songs;
-  }, [initialSongs, searchTerm, showOnlyTieup]);
+  }, [initialSongs, searchTerm, showOnlyTieup,showOnlyLive]);
 
   const handleSongClick = (songId: string) => {
     setSelectedSongId(songId);
@@ -63,6 +73,11 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
   // タイアップフィルタのトグル
   const toggleTieupFilter = () => {
     setShowOnlyTieup(!showOnlyTieup);
+  };
+
+  // ライブ映像フィルタのトグル
+  const toggleLiveFilter = () => {
+    setShowOnlyLive(!showOnlyLive);
   };
 
   return (
@@ -94,23 +109,44 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
           </div>
         </div>
 
-        {/* タイアップフィルタボタン */}
-        <button
-          onClick={toggleTieupFilter}
-          className={`flex items-center gap-2 px-2 py-1 text-sm rounded-lg transition-all ${
-            showOnlyTieup
-              ? 'bg-blue-600 text-white hover:bg-blue-700'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
-        >
-          <FaMusic className="text-xs" />
-          <span>タイアップありのみ</span>
-          {showOnlyTieup && (
-            <span className="ml-1 text-xs bg-blue-500 px-2 py-0.5 rounded-full">
-              ON
-            </span>
-          )}
-        </button>
+        <div className="flex lg:flex-col xl:flex-row gap-2 mb-2">
+          {/* タイアップフィルタボタン */}
+          <button
+            onClick={toggleTieupFilter}
+            className={`flex items-center gap-2 px-2 py-1 w-2/3 lg:w-[100%] xl:w-2/3 text-sm rounded-lg transition-all ${
+              showOnlyTieup
+                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            <FaMusic className="text-xs" />
+            <span>タイアップあり</span>
+            {showOnlyTieup && (
+              <span className="ml-1 text-xs bg-blue-500 px-2 py-0.5 rounded-full">
+                ON
+              </span>
+            )}
+          </button>
+
+            
+          {/* ライブ映像フィルタボタン */}
+          <button
+            onClick={toggleLiveFilter}
+            className={`flex items-center gap-2 px-2 py-1 w-2/3 lg:w-[100%] xl:w-2/3 text-sm rounded-lg transition-all ${
+              showOnlyLive
+                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            <RiLiveFill className="text-xs" />
+            <span>ライブ映像あり</span>
+            {showOnlyLive && (
+              <span className="ml-1 text-xs bg-blue-500 px-2 py-0.5 rounded-full">
+                ON
+              </span>
+            )}
+          </button>
+          </div>
       </div>
 
       {/* 曲一覧 */}
@@ -131,6 +167,10 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
                 {/* タイアップアイコン表示 */}
                 {song.tieup_info?.tieup_info_1?.tieup_name && (
                   <FaMusic className="text-xs text-blue-600" title="タイアップあり" />
+                )}
+                {/* ライブアイコン表示 */}
+                {song.live_url && (
+                  <RiLiveFill className="text-xs text-red-500" title="ライブ映像あり" />
                 )}
                 <span className="text-xs text-gray-500 lg:hidden">( {song.album} )</span>
               </div>
