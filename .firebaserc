@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "yorushika-app1",
+    "dev": "yorushika-app1-dev"
+  },
+  "targets": {},
+  "etags": {}
+}
