@@ -2,14 +2,13 @@ import React, { Suspense } from "react";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import Sidebar from "@/app/components/Sidebar/Sidebar";
-import Main from "@/app/components/Main/Main";
 import { getSongs } from "@/lib/songs";
 import Loading from "@/app/(main)/loading";
 
 // ✅ ISR設定をページレベルで行う
 export const revalidate = 3600; // 1時間ごとに再生成
 
-const MainLayout = async ({}: // children,
+const MainLayout = async ({children}:
 Readonly<{
   children: React.ReactNode;
 }>) => {
@@ -33,11 +32,9 @@ Readonly<{
         {/* メインコンテンツエリア */}
         <div className="col-span-1 p-2 mt-5 mb-5 bg-gray-100 rounded-md sm:col-span-4 grid-item">
           <main className="flex-1">
-            {/* ✅ childrenの代わりにMainコンポーネントを表示 */}
             <Suspense fallback={<Loading />}>
-              <Main songsData={allSongs} />
+              {children} 
             </Suspense>
-            {/* {children}  */}
           </main>
         </div>
       </div>

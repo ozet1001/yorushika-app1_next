@@ -1,6 +1,7 @@
 import { getSongById } from '@/lib/songs';
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import Main from "@/app/components/Main/Main";
+import { getSongs } from "@/lib/songs";
 
 interface PageProps {
   params: {
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
       title: '楽曲が見つかりません - 月猫図書館',
       description: '指定された楽曲は存在しないか削除されています。',
-      robots: 'noindex, nofollow', // 404は検索エンジンからブロック
+      robots: 'noindex, nofollow',
     };
   }
 
@@ -38,7 +39,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       'J-POP'
     ].join(', '),
     
-    // Open Graph（SNS共有）
     openGraph: {
       title: `${song.name} - ${song.album}`,
       description: song.song_info || `${song.name}の楽曲詳細`,
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         }
       ] : [
         {
-          url: '/og-default.jpg', // デフォルト画像
+          url: '/og-default.jpg',
           width: 1200,
           height: 630,
           alt: 'ヨルシカ楽曲データベース',
@@ -60,7 +60,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ],
     },
     
-    // Twitter Card
     twitter: {
       card: 'summary_large_image',
       title: `${song.name} - (${song.album})`,
@@ -68,7 +67,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: song.photo ? [song.photo] : ['/og-default.jpg'],
     },
     
-    // 構造化データ用
     other: {
       'music:song': song.name,
       'music:album': song.album,
@@ -77,16 +75,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// ✅ SEO最適: Server Componentで完全なHTML生成
-export default async function SongDetailPage({ params }: PageProps) {
+
+// ✅ 実際のレンダリング（Main コンポーネントが楽曲詳細を表示）
+export default async function SongPage({ params }: PageProps) {
+  const allSongs = await getSongs();
   const song = await getSongById(params.id);
 
-  if (!song) {
-    notFound();
-  }
-
-  // ✅ 構造化データ（JSON-LD）
-  const jsonLd = {
+  // ✅ 構造化データ（JSON-LD）- SEO用
+  const jsonLd = song ? {
     '@context': 'https://schema.org',
     '@type': 'MusicRecording',
     name: song.name,
@@ -115,27 +111,33 @@ export default async function SongDetailPage({ params }: PageProps) {
         url: song.mv_url,
       }
     }),
-  };
+  } : null;
 
   return (
     <>
-      {/* ✅ 構造化データ埋め込み */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
-      
+      {/* ✅ 構造化データ埋め込み（SEO用） */}
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
+        />
+      )}
       
       {/* ✅ 非表示のSEO用データ（検索エンジン用） */}
-      <div style={{ display: 'none' }}>
-        <h1>{song.name}</h1>
-        <p>アーティスト: ヨルシカ</p>
-        <p>アルバム: {song.album}</p>
-        <p>リリース: {song.year}</p>
-        <p>{song.song_info}</p>
-      </div>
+      {song && (
+        <div style={{ display: 'none' }}>
+          <h1>{song.name}</h1>
+          <p>アーティスト: ヨルシカ</p>
+          <p>アルバム: {song.album}</p>
+          <p>リリース: {song.year}</p>
+          <p>{song.song_info}</p>
+        </div>
+      )}
+      
+      {/* ✅ Main コンポーネントを表示させる */}
+      <Main songsData={allSongs} />
     </>
   );
 }
