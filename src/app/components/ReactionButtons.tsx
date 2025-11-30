@@ -37,6 +37,7 @@ export default function ReactionButtons({ songId }: ReactionButtonsProps) {
   return (
     <div className="flex flex-col gap-3">
       <p className="text-sm text-gray-700">※ この曲についてどう思う？以下のボタンをタップして投票をお願いします！</p>
+      <p className="text-sm text-gray-700">※ 上部ヘッダーメニューの「みんなの感想ランキング」の投票数に加算されます。</p>
       <div className="flex flex-row flex-wrap gap-2">
         {/* 好き */}
         <button

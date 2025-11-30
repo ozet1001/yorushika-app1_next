@@ -46,7 +46,7 @@ function Header() {
           {/* ホーム */}
           <Link
             href="/"
-            className="text-xs sm:text-base font-semibold hover:underline hover:scale-105 transition-all duration-150"
+            className="text-sm sm:text-base font-semibold hover:underline hover:scale-105 transition-all duration-150"
           >
             🏠 ホーム
           </Link>
@@ -54,7 +54,7 @@ function Header() {
           {/* ランキング */}
           <Link
             href="/ranking"
-            className="text-xs sm:text-base font-semibold hover:underline hover:scale-105 transition-all duration-150 whitespace-nowrap"
+            className="text-sm sm:text-base font-semibold hover:underline hover:scale-105 transition-all duration-150 whitespace-nowrap"
           >
             🏆 みんなの感想ランキング
           </Link>
