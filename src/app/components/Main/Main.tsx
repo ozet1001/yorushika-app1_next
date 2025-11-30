@@ -13,6 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import ReactionButtons from '@/app/components/ReactionButtons';
 
 interface MainProps {
   songsData: Song[];
@@ -152,6 +153,11 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 <dd className="text-gray-800">{song.year}</dd>
               </div>
             </dl>
+
+            {/* リアクション機能 */}
+            <h2 className="text-xl font-bold text-gray-800 mt-4 mb-2">みんなの感想</h2>
+            <div className="mb-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+            <ReactionButtons songId={song.id} />
           </section>
 
           {/* 演奏情報 */}
