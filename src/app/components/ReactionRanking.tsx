@@ -101,10 +101,10 @@ export default function ReactionRanking() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div id="ranking-title" className="container mx-auto px-4 py-8 max-w-4xl">
       {/* ヘッダー */}
       <div className="mb-8">
-        <h1 className="text-xl sm:text-3xl md:text-4xl font-bold mb-2">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">
           みんなの感想ランキング
         </h1>
         <p className="text-sm sm:text-base text-gray-600">

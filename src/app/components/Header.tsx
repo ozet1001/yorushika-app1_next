@@ -53,7 +53,7 @@ function Header() {
           
           {/* ランキング */}
           <Link
-            href="/ranking"
+            href="/ranking#ranking-title"
             className="text-sm sm:text-base font-semibold hover:underline hover:scale-105 transition-all duration-150 whitespace-nowrap"
           >
             🏆 みんなの感想ランキング
