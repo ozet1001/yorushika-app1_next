@@ -8,7 +8,7 @@ interface ReactionButtonsProps {
 }
 
 export default function ReactionButtons({ songId }: ReactionButtonsProps) {
-  const { reactions, userReactions, loading, error, toggleReaction } =
+  const { reactions, userReactions, loading, error, isProcessing, toggleReaction } =
     useReactions(songId);
 
   const handleClick = async (type: ReactionType) => {
@@ -42,10 +42,11 @@ export default function ReactionButtons({ songId }: ReactionButtonsProps) {
         {/* 好き */}
         <button
           onClick={() => handleClick('suki')}
-          // disabled={userReactions.suki}
+          disabled={isProcessing}
           className={`
             flex items-center gap-2 px-1 py-1 rounded-lg border-2 
             transition-all duration-200
+            ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}
             ${
               userReactions.suki
                 ? 'bg-pink-100 border-pink-500 hover:bg-pink-200'
@@ -64,10 +65,11 @@ export default function ReactionButtons({ songId }: ReactionButtonsProps) {
         {/* 泣ける */}
         <button
           onClick={() => handleClick('nakeru')}
-          // disabled={userReactions.nakeru}
+          disabled={isProcessing}
           className={`
             flex items-center gap-2 px-1 py-1 rounded-lg border-2 
             transition-all duration-200
+            ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}
             ${
               userReactions.nakeru
                 ? 'bg-blue-100 border-blue-500 hover:bg-blue-200'
@@ -86,10 +88,11 @@ export default function ReactionButtons({ songId }: ReactionButtonsProps) {
         {/* 演奏してみたい */}
         <button
           onClick={() => handleClick('ensou')}
-          // disabled={userReactions.ensou}
+          disabled={isProcessing}
           className={`
             flex items-center gap-2 px-1 py-1 rounded-lg border-2 
             transition-all duration-200
+            ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}
             ${
               userReactions.ensou
                 ? 'bg-purple-100 border-purple-500 hover:bg-purple-200'
@@ -105,6 +108,13 @@ export default function ReactionButtons({ songId }: ReactionButtonsProps) {
           )}
         </button>
       </div>
+
+      {/* 処理中のインジケーター */}
+      {isProcessing && (
+        <div className="text-sm text-gray-500 text-center">
+          処理中...
+        </div>
+      )}
     </div>
   );
 }
