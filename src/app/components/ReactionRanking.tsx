@@ -1,14 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { getRanking } from '@/lib/reactions';
+import { useState, useEffect, useMemo } from 'react';
 import { RankingSong, RankingType } from '@/types/ranking';
+import { getAllSongsReactions } from '@/lib/reactions';
 import { ReactionType } from '@/types/reaction';
 import Link from 'next/link';
 
 export default function ReactionRanking() {
   const [rankingType, setRankingType] = useState<RankingType>('total');
-  const [songs, setSongs] = useState<RankingSong[]>([]);
+  // const [songs, setSongs] = useState<RankingSong[]>([]);
+  const [allSongs, setAllSongs] = useState<RankingSong[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,8 +20,8 @@ export default function ReactionRanking() {
       
       try {
         console.log(`📊 Loading ${rankingType} ranking...`);
-        const data = await getRanking(rankingType, 10);
-        setSongs(data);
+        const data = await getAllSongsReactions();
+        setAllSongs(data);
         console.log(`✅ Loaded ${data.length} songs`);
       } catch (err) {
         console.error('❌ Error loading ranking:', err);
@@ -31,7 +32,28 @@ export default function ReactionRanking() {
     }
     
     loadRanking();
-  }, [rankingType]);
+  }, []);
+
+  const songs = useMemo(() => {
+    if (allSongs.length === 0) return [];
+    
+    let sorted: RankingSong[];
+    
+    if (rankingType === 'total') {
+      sorted = [...allSongs].sort((a, b) => b.totalReactions - a.totalReactions);
+    } else {
+      const type = rankingType as ReactionType;
+      sorted = [...allSongs].sort((a, b) => b.reactions[type] - a.reactions[type]);
+    }
+    
+    // 0より大きいものだけ、上位10件
+    return sorted.filter(item => {
+      if (rankingType === 'total') {
+        return item.totalReactions > 0;
+      }
+      return item.reactions[rankingType as ReactionType] > 0;
+    }).slice(0, 10);
+  }, [allSongs, rankingType]);
 
   const getRankIcon = (rank: number): string => {
     switch (rank) {
