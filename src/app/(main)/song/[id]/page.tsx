@@ -10,7 +10,7 @@ interface PageProps {
 }
 
 // ISR設定（SEO + パフォーマンス）
-export const revalidate = 3600;
+// export const revalidate = 3600;
 
 // 動的メタデータ生成
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
