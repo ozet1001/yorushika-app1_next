@@ -285,23 +285,39 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section>
 
           {/* 演奏動画 */}
-          {song?.covers?.guitar?.guitar_1.channel_url && (
+          {song?.covers?.guitar?.guitar_1.youtube_url && (
             <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-4 sm:p-8 border border-gray-100">
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-gray-800 mb-2">演奏動画</h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               </div>
 
-                <iframe
-                  className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
-                  width="350"
-                  height="350"
-                  src={song?.covers?.guitar?.guitar_1.channel_url}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
+              <h3 className="text-xl font-bold text-gray-800 ml-2 mb-2">ギター</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-200 rounded-full ml-3 mb-4"></div>
+              <iframe
+                className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
+                width="350"
+                height="350"
+                src={song?.covers?.guitar?.guitar_1.youtube_url}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+              {/* チャンネル名リンク表示 */}
+              {song?.covers?.guitar?.guitar_1.channel_name && (
+                <div className="mt-3 text-left">
+                  <a
+                    href={song?.covers?.guitar?.guitar_1.channel_url || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-800 font-semibold text-base underline text-sm ml-5 mr-3"
+                  >
+                    {song.covers.guitar.guitar_1.channel_name}
+                  </a>
+                  さん
+                </div>
+              )}
             </section>
           )}
 
@@ -802,7 +818,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             </section>
 
           {/* グッズ情報 */}
-          <section className="bg-white rounded-lg shadow-md p-6">
+          {/* <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-bold text-gray-800 mb-2">関連グッズ</h2>
             <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
             {song.goods?.goods_1?.goods_name && (
@@ -895,7 +911,8 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 )}
               </div>
             )}
-          </section>
+          </section> */}
+
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-2">楽曲考察</h2>
               <div className="mb-2 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
