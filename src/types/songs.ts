@@ -38,6 +38,7 @@ interface Song {
     capo: string;
   };
 
+  
   // タイアップ情報
   tieup_info: {
     tieup_info_1: {
@@ -177,6 +178,72 @@ interface Song {
       account_name: string;
       account_url: string;
       like_count: number;
+    };
+  };
+
+  // 演奏情報
+  covers: {
+    guitar: {
+      guitar_1: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+      guitar_2: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+      guitar_3: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+    };
+    base: {
+      base_1: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+      base_2: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+    };
+    drums: {
+      drums_1: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+      base_2: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+    };
+    piano: {
+      piano_1: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
+      piano_2: {
+        youtube_url: string;
+        title: string;
+        channel_name: string;
+        channel_url: string;
+      };
     };
   };
 }

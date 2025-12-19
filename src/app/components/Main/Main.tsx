@@ -283,6 +283,29 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               )}
 
           </section>
+
+          {/* 演奏動画 */}
+          {song?.covers?.guitar?.guitar_1.channel_url && (
+            <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-4 sm:p-8 border border-gray-100">
+              <div className="mb-6">
+                <h2 className="text-xl font-bold text-gray-800 mb-2">演奏動画</h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+              </div>
+
+                <iframe
+                  className="block w-full sm:max-w-[500px] ml-1 sm:ml-5 rounded-lg"
+                  width="350"
+                  height="350"
+                  src={song?.covers?.guitar?.guitar_1.channel_url}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+            </section>
+          )}
+
+
           {/* 聖地情報 */}
           {song?.holy_locations?.holy_locations_1?.location_name && (
             <section className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-4 sm:p-8 border border-gray-100">
