@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             {/* アフィリエイトプログラム */}
-            <section className="mb-8">
+            {/* <section className="mb-8">
                 <h2 className="text-xl font-bold mb-4" style={{ color: '#499FD8' }}>
                 アフィリエイトプログラムについて
                 </h2>
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
                 <div className="bg-blue-50 border-l-4 p-4 text-sm text-gray-700" style={{ borderColor: '#499FD8' }}>
                 ※ アフィリエイトリンクを経由して商品を購入された場合でも、訪問者の皆様には金銭的な負担は一切発生しません。
                 </div>
-            </section>
+            </section> */}
 
             {/* Cookie */}
             <section className="mb-8">
