@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 // firestoreからのSong型をインポート
 import { Song } from "@/types/songs";
-import DOMPurify from "isomorphic-dompurify";
+// import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import XShareButton from "@/app/components/XShareButton";
 import {
@@ -22,27 +22,27 @@ interface MainProps {
 // アフィリエイトリンクの判定関数
 // URLが楽天またはAmazonのアフィリエイトリンクかどうかを判定
 // MEMO: レンダリング時に毎回読込みされないように、コンポーネントの外に定義
-const isAffiliateLink = (url: string): boolean => {
-  if (!url) return false;
+// const isAffiliateLink = (url: string): boolean => {
+//   if (!url) return false;
 
-  const rakutenPatterns = [
-    "hb.afl.rakuten.co.jp",
-    "af.moshimo.com",
-    "px.a8.net",
-    "rakuten.co.jp",
-  ];
+//   const rakutenPatterns = [
+//     "hb.afl.rakuten.co.jp",
+//     "af.moshimo.com",
+//     "px.a8.net",
+//     "rakuten.co.jp",
+//   ];
 
-  const amazonPatterns = [
-    "amazon.co.jp",
-    // "amzn.to",
-    "amazon.com",
-    "associates-amazon.com",
-  ];
+//   const amazonPatterns = [
+//     "amazon.co.jp",
+//     // "amzn.to",
+//     "amazon.com",
+//     "associates-amazon.com",
+//   ];
 
-  const allAffiliatePatterns = [...rakutenPatterns, ...amazonPatterns];
+//   const allAffiliatePatterns = [...rakutenPatterns, ...amazonPatterns];
 
-  return allAffiliatePatterns.some((pattern) => url.includes(pattern));
-};
+//   return allAffiliatePatterns.some((pattern) => url.includes(pattern));
+// };
 
 const Main = ({ songsData }: MainProps) => {
   const pathname = usePathname();
