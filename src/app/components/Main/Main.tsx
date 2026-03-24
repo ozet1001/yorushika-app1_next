@@ -115,8 +115,8 @@ const SongDetailContent = ({ song }: { song: Song }) => {
             <li className="font-medium">{song.name}</li>
           </ol>
         </nav> */}
-
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 ml-3">
+        <p className="text-xs sm:text-sm ml-4 tracking-wider">{song.kana}</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-1 ml-3">
           {song.name}
         </h1>
         {/* <p className="text-lg text-gray-600">
