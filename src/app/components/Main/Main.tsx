@@ -1143,9 +1143,9 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   どんな角度からの解釈でも大歓迎です✨
                 </p>
                 
-                <p className="text-purple-600 font-medium mb-4 text-sm">
+                {/* <p className="text-purple-600 font-medium mb-4 text-sm">
                   XでDMをいただけると嬉しいです🎵
-                </p>
+                </p> */}
                 
                 <div className="border-t border-gray-200 pt-3 mt-4 bg-white/50 -mx-4 px-4 rounded-b-lg">
                   <p className="text-xs text-gray-500 text-center">
@@ -1231,7 +1231,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section> */}
         </aside>
       </div>
-      <Accordion type="single" collapsible className="w-[100%] sm:w-[66%] mt-6 bg-blue-200 rounded-md">
+      {/* <Accordion type="single" collapsible className="w-[100%] sm:w-[66%] mt-6 bg-blue-200 rounded-md">
         <AccordionItem value="greeting">
           <AccordionTrigger className="pl-5 pr-5 no-underline hover:no-underlin">管理人メッセージ</AccordionTrigger>
           <AccordionContent className="bg-white rounded-b-mde">
@@ -1267,7 +1267,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 </div>
               </AccordionContent>
             </AccordionItem>
-          </Accordion>
+          </Accordion> */}
     </div>
   );
 };
