@@ -7,12 +7,12 @@ import { Song } from "@/types/songs";
 // import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import XShareButton from "@/app/components/XShareButton";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+// import {
+//   Accordion,
+//   AccordionContent,
+//   AccordionItem,
+//   AccordionTrigger,
+// } from "@/components/ui/accordion"
 import ReactionButtons from '@/app/components/ReactionButtons';
 
 interface MainProps {
