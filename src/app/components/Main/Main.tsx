@@ -715,8 +715,8 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               {/* 募集文 */}
               <div className="mt-5 p-3 bg-blue-50 border-l-4 border-blue-300 rounded-r-lg">
                 <p className="text-sm text-gray-600">
-                  📸 <span className="font-medium">ここに載せる聖地画像ほしいです！</span><br /><br />
-                  聖地画像を載せてもいいよ！って方は、
+                  📸 <span className="font-medium">ここに載せる聖地画像、募集しています！</span><br /><br />
+                  {/* 聖地画像を載せてもいいよ！って方は、
                   <a 
                     href="https://x.com/GuanDou29555" 
                     target="_blank" 
@@ -725,7 +725,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   >
                     X
                   </a>
-                  へDM等いただけますと大変嬉しいです！🙏<br />
+                  へDM等いただけますと大変嬉しいです！🙏<br /> */}
                 </p>
               </div>
             </section>
@@ -1120,7 +1120,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   🌙 あなたの考察を聞かせてください！
                 </p>
                 
-                <ul className="text-gray-600 mb-4 space-y-2 text-sm">
+                {/* <ul className="text-gray-600 mb-4 space-y-2 text-sm">
                   <li className="flex items-start">
                     <span className="text-purple-500 mr-2 mt-0.5">•</span>
                     歌詞の意味や解釈
@@ -1141,7 +1141,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 
                 <p className="text-gray-700 mb-4 leading-normal text-sm">
                   どんな角度からの解釈でも大歓迎です✨
-                </p>
+                </p> */}
                 
                 {/* <p className="text-purple-600 font-medium mb-4 text-sm">
                   XでDMをいただけると嬉しいです🎵
