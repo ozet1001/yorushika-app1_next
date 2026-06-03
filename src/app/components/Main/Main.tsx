@@ -7,12 +7,12 @@ import { Song } from "@/types/songs";
 // import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import XShareButton from "@/app/components/XShareButton";
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionItem,
-//   AccordionTrigger,
-// } from "@/components/ui/accordion"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import ReactionButtons from '@/app/components/ReactionButtons';
 
 interface MainProps {
@@ -716,7 +716,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
               <div className="mt-5 p-3 bg-blue-50 border-l-4 border-blue-300 rounded-r-lg">
                 <p className="text-sm text-gray-600">
                   📸 <span className="font-medium">ここに載せる聖地画像、募集しています！</span><br /><br />
-                  {/* 聖地画像を載せてもいいよ！って方は、
+                  聖地画像を載せてもいいよ！って方は、
                   <a 
                     href="https://x.com/GuanDou29555" 
                     target="_blank" 
@@ -725,7 +725,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   >
                     X
                   </a>
-                  へDM等いただけますと大変嬉しいです！🙏<br /> */}
+                  へDM等いただけますと大変嬉しいです！🙏<br />
                 </p>
               </div>
             </section>
@@ -1120,7 +1120,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                   🌙 あなたの考察を聞かせてください！
                 </p>
                 
-                {/* <ul className="text-gray-600 mb-4 space-y-2 text-sm">
+                <ul className="text-gray-600 mb-4 space-y-2 text-sm">
                   <li className="flex items-start">
                     <span className="text-purple-500 mr-2 mt-0.5">•</span>
                     歌詞の意味や解釈
@@ -1141,11 +1141,11 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 
                 <p className="text-gray-700 mb-4 leading-normal text-sm">
                   どんな角度からの解釈でも大歓迎です✨
-                </p> */}
+                </p>
                 
-                {/* <p className="text-purple-600 font-medium mb-4 text-sm">
+                <p className="text-purple-600 font-medium mb-4 text-sm">
                   XでDMをいただけると嬉しいです🎵
-                </p> */}
+                </p>
                 
                 <div className="border-t border-gray-200 pt-3 mt-4 bg-white/50 -mx-4 px-4 rounded-b-lg">
                   <p className="text-xs text-gray-500 text-center">
@@ -1231,7 +1231,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section> */}
         </aside>
       </div>
-      {/* <Accordion type="single" collapsible className="w-[100%] sm:w-[66%] mt-6 bg-blue-200 rounded-md">
+      <Accordion type="single" collapsible className="w-[100%] sm:w-[66%] mt-6 bg-blue-200 rounded-md">
         <AccordionItem value="greeting">
           <AccordionTrigger className="pl-5 pr-5 no-underline hover:no-underlin">管理人メッセージ</AccordionTrigger>
           <AccordionContent className="bg-white rounded-b-mde">
@@ -1267,7 +1267,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 </div>
               </AccordionContent>
             </AccordionItem>
-          </Accordion> */}
+          </Accordion>
     </div>
   );
 };
