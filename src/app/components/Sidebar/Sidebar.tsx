@@ -25,7 +25,7 @@ const Sidebar = async ({ songsData }: SidebarProps) => {
   }
 
   return (
-    <aside className="h-[100%] z-0 sm:p-2 border border-r-2 rounded-sm">
+    <aside className="bg-slate-200 h-[100%] z-0 sm:p-2 border border-r-2 rounded-sm">
       <div className="h-[350px] lg:h-[90%] pr-2">
         <SongListClient initialSongs={all_songs} />
       </div>

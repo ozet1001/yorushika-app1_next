@@ -150,10 +150,10 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
       </div>
 
       {/* 曲一覧 */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="m-2 flex-1 overflow-y-auto border-2 rounded border-gray-400">
         {filteredSongs.map((song) => (
           <div
-            className={`p-3 ml-3 cursor-pointer hover:bg-blue-200 transition-colors border-b border-gray-100 ${
+            className={`p-3 ml-3 cursor-pointer hover:bg-blue-200 transition-colors border-b border-gray-400 ${
               selectedSongId === song.id 
                 ? 'bg-blue-300 border-r-4 border-blue-800' 
                 : ''
