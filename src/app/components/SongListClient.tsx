@@ -18,8 +18,18 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showOnlyTieup, setShowOnlyTieup] = useState(false); // タイアップフィルタのstate
   const [showOnlyLive, setShowOnlyLive] = useState(false); // ライブ映像ィルタのstate
+  const [sortOrder, setSortOrder] = useState<'none' | 'bpm-asc' | 'bpm-desc'>('none'); // BPMソート順
 
-  // 検索フィルタリング + タイアップフィルタリング+ ライブ映像フィルタリング
+  // BPM文字列から数値を抽出する関数
+  const parseBpm = (bpmStr: string): number => {
+    if (!bpmStr || bpmStr.trim() === '') return 0;
+
+    // "125（または130）" のような形式から最初の数値を抽出
+    const match = bpmStr.match(/(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+  };
+
+  // 検索フィルタリング + タイアップフィルタリング+ ライブ映像フィルタリング + BPMソート
   const filteredSongs = useMemo(() => {
     let songs = initialSongs;
 
@@ -49,8 +59,35 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
       );
     }
 
+    // BPMソート
+    if (sortOrder === 'bpm-asc') {
+      songs = [...songs].sort((a, b) => {
+        const bpmA = parseBpm(a.play_info?.bpm || '');
+        const bpmB = parseBpm(b.play_info?.bpm || '');
+
+        // BPMが0の場合は最後に配置
+        if (bpmA === 0 && bpmB === 0) return 0;
+        if (bpmA === 0) return 1;
+        if (bpmB === 0) return -1;
+
+        return bpmA - bpmB;
+      });
+    } else if (sortOrder === 'bpm-desc') {
+      songs = [...songs].sort((a, b) => {
+        const bpmA = parseBpm(a.play_info?.bpm || '');
+        const bpmB = parseBpm(b.play_info?.bpm || '');
+
+        // BPMが0の場合は最後に配置
+        if (bpmA === 0 && bpmB === 0) return 0;
+        if (bpmA === 0) return 1;
+        if (bpmB === 0) return -1;
+
+        return bpmB - bpmA;
+      });
+    }
+
     return songs;
-  }, [initialSongs, searchTerm, showOnlyTieup,showOnlyLive]);
+  }, [initialSongs, searchTerm, showOnlyTieup, showOnlyLive, sortOrder]);
 
   const handleSongClick = (songId: string) => {
     setSelectedSongId(songId);
@@ -78,6 +115,17 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
   // ライブ映像フィルタのトグル
   const toggleLiveFilter = () => {
     setShowOnlyLive(!showOnlyLive);
+  };
+
+  // BPMソートのトグル（なし → 昇順 → 降順 → なし）
+  const toggleBpmSort = () => {
+    if (sortOrder === 'none') {
+      setSortOrder('bpm-asc');
+    } else if (sortOrder === 'bpm-asc') {
+      setSortOrder('bpm-desc');
+    } else {
+      setSortOrder('none');
+    }
   };
 
   return (
@@ -147,6 +195,25 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
             )}
           </button>
           </div>
+
+        {/* BPMソートボタン */}
+        <button
+          onClick={toggleBpmSort}
+          className={`flex items-center justify-between gap-2 px-3 py-2 text-sm rounded-lg transition-all ${
+            sortOrder !== 'none'
+              ? 'bg-purple-600 text-white hover:bg-purple-700'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          <span className="flex items-center gap-2">
+            <span>BPM順</span>
+          </span>
+          <span className="text-xs font-bold">
+            {sortOrder === 'bpm-asc' && '↑ 昇順'}
+            {sortOrder === 'bpm-desc' && '↓ 降順'}
+            {sortOrder === 'none' && '－'}
+          </span>
+        </button>
       </div>
 
       {/* 曲一覧 */}
@@ -174,7 +241,14 @@ const SongListClient = ({ initialSongs }: SongListClientProps) => {
                 )}
                 <span className="text-xs text-gray-500 lg:hidden">( {song.album} )</span>
               </div>
-              <span className="text-sm text-gray-600 hidden lg:inline">{song.album}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-600 hidden lg:inline">{song.album}</span>
+                {song.play_info?.bpm && (
+                  <span className="text-xs text-purple-600 font-medium">
+                    ♪ {song.play_info.bpm}
+                  </span>
+                )}
+              </div>
               <span className="text-xs text-gray-500 hidden lg:inline">{song.year}</span>
             </Link>
           </div>
