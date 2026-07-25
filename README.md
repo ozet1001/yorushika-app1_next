@@ -75,8 +75,6 @@ npm install
 npm run dev
 ```
 
-5. **変更を加えてPull Requestを送信！ / Make your changes and submit a Pull Request!**
-
 ---
 
 ### 管理者向け（完全セットアップ）/ For Administrators (Full Setup)
@@ -107,7 +105,5 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 **⭐ このプロジェクトが気に入ったら、スターをお願いします！**  
 **⭐ If you like this project, please give it a star! ⭐**
 
-ヨルシカファンの皆様へ、愛を込めて ❤️  
-Made with ❤️ for Yorushika fans
 
 </div>
