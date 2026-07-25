@@ -7,12 +7,12 @@ import { Song } from "@/types/songs";
 // import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import XShareButton from "@/app/components/XShareButton";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+// import {
+//   Accordion,
+//   AccordionContent,
+//   AccordionItem,
+//   AccordionTrigger,
+// } from "@/components/ui/accordion"
 import ReactionButtons from '@/app/components/ReactionButtons';
 
 interface MainProps {
@@ -1231,7 +1231,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
           </section> */}
         </aside>
       </div>
-      <Accordion type="single" collapsible className="w-[100%] sm:w-[66%] mt-6 bg-blue-200 rounded-md">
+      {/* <Accordion type="single" collapsible className="w-[100%] sm:w-[66%] mt-6 bg-blue-200 rounded-md">
         <AccordionItem value="greeting">
           <AccordionTrigger className="pl-5 pr-5 no-underline hover:no-underlin">管理人メッセージ</AccordionTrigger>
           <AccordionContent className="bg-white rounded-b-mde">
@@ -1267,7 +1267,7 @@ const SongDetailContent = ({ song }: { song: Song }) => {
                 </div>
               </AccordionContent>
             </AccordionItem>
-          </Accordion>
+          </Accordion> */}
     </div>
   );
 };
