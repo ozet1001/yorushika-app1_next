@@ -36,6 +36,29 @@ function Header() {
           </p>
         </div>
       </header>
+      {/* グローバルナビゲーション */}
+      <nav
+        className="w-full py-3 text-white shadow-md"
+        style={{ backgroundColor: '#7FC3EA' }}
+      >
+        <div className="container flex flex-wrap justify-center gap-4 md:gap-8 mx-auto px-4">
+          {/* ホーム */}
+          <Link
+            href="/"
+            className="text-sm sm:text-base font-semibold hover:underline hover:scale-105 transition-all duration-150"
+          >
+            🏠 ホーム
+          </Link>
+
+          {/* クイズ */}
+          <Link
+            href="/quiz"
+            className="text-sm sm:text-base font-semibold hover:underline hover:scale-105 transition-all duration-150 whitespace-nowrap"
+          >
+            ❓ クイズ
+          </Link>
+        </div>
+      </nav>
     </>
   );
 }

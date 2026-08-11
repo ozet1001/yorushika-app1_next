@@ -3,6 +3,7 @@ import Script from 'next/script'
 import localFont from "next/font/local";
 import { Kaisei_Decol } from 'next/font/google'
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 
 const kaisei = Kaisei_Decol({ 
@@ -75,7 +76,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${kaisei.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

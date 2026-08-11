@@ -1,19 +1,31 @@
+rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // 曲情報
     match /songs/{songId} {
-      // match /{document=**} {
-      // This rule allows anyone with your database reference to view, edit,
-      // and delete all data in your database. It is useful for getting
-      // started, but it is configured to expire after 30 days because it
-      // leaves your app open to attackers. At that time, all client
-      // requests to your database will be denied.
-      //
-      // Make sure to write security rules for your app before that time, or
-      // else all client requests to your database will be denied until you
-      // update your rules.
-      // allow read, write: if request.time < timestamp.date(2035, 5, 13);
-      allow read: if true;
-      allow create, update, delete: if request.auth != null;
+      allow read: if true;           // 誰でも読み取り可能
+      allow write: if false;         // 誰も書き込めない（管理者のみ）
+
+      // リアクション（songs の中にネスト）
+      match /reactions/{docId} {
+        allow read: if true;         // 誰でも読み取り可能
+        allow create, update: if true;  // 誰でも作成・更新可能
+        allow delete: if false;      // 削除は不可
+      }
+    }
+
+    // クイズ成績（匿名認証のuidごと）
+    match /quizResults/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.bestStreak is int
+        && request.resource.data.bestStreak >= 0
+        && request.resource.data.totalCorrect is int
+        && request.resource.data.totalCorrect >= 0
+        && request.resource.data.categoryStats is map;
+      allow delete: if false;
     }
   }
 }
